@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom'
+import {HashRouter as Router, Route} from 'react-router-dom'
+import NavBar from './components/NavBar'
 import Home from './pages/Home'
 import Restaurant from './pages/Restaurant'
-import routes from './constants/routes'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route exact path={routes.home} component={Home}/>
-          <Route exact path={routes.restaurant} component={Restaurant}/>
-        </Switch>
+        <div>
+          <NavBar/>
+          <Route exact path="/" component={Home}/>
+          <Route path="/restaurant/:id" component={Restaurant}/>
+        </div>
       </Router>
     );
   }
