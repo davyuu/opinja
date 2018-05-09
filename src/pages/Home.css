@@ -1,3 +1,27 @@
 .home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
+}
+
+.home-title {
+
+}
+
+.home-list {
+
+}
+
+.home-list-item {
+  width: 10em;
+  margin: 1em auto;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.home-list-item-link {
+  text-decoration: none;
 }

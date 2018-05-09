@@ -1,8 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
-import RestaurantItem from '../components/RestaurantItem'
+// import RestaurantItem from '../components/RestaurantItem'
 import data from '../data/data'
-import restaurants from '../data/restaurants'
 import './Restaurant.css'
 
 const customStyles = {
@@ -17,8 +16,8 @@ const customStyles = {
 };
 
 class Restaurant extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       modalIsOpen: false,
@@ -62,10 +61,11 @@ class Restaurant extends React.Component {
       content = (
         <div>
           <h1 className='restaurant-name'>{restaurant.name}</h1>
-          <div>
+          <div className='restaurant-list'>
             {restaurant.items.map((item, i) =>
               <div
-                className='restaurant-item'
+                key={i}
+                className='restaurant-list-item'
                 onClick={() => this.openModal()}
               >
                 {item}
