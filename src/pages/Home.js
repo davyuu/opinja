@@ -7,27 +7,25 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div className='home'>
-				<div>
-					<h1 className="home-title">
-						SELECT A RESTAURANT
-					</h1>
-					<div className='home-list'>
-						{data.map((restaurant, i) => {
-							return (
-								<div
-									key={i}
-									className='home-list-item'
+				<h1 className="home-title">
+					SELECT A RESTAURANT
+				</h1>
+				<div className='home-list'>
+					{data.map((restaurant, i) => {
+						return (
+							<div
+								key={i}
+								className='home-list-item'
+							>
+								<Link
+									className="home-list-item-link"
+									to={`/restaurant/${restaurant.id}`}
 								>
-									<Link
-										className="home-list-item-link"
-										to={`/restaurant/${restaurant.id}`}
-									>
-										{restaurant.name}
-									</Link>
-								</div>
-							)
-						})}
-					</div>
+									{restaurant.name}
+								</Link>
+							</div>
+						)
+					})}
 				</div>
 			</div>
 		)

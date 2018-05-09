@@ -9,12 +9,32 @@
 }
 
 .restaurant-list-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
   width: 10em;
   margin: 1em auto;
   padding: 1em;
-  border: 2px solid black;
-  border-radius: 1em;
+  border: 2px solid grey;
+  border-radius: 2em;
   cursor: pointer;
+}
+
+.restaurant-list-item-fill {
+  width: 2em;
+  height: 2em;
+}
+
+.restaurant-list-item-name {
+  margin: 0;
+  padding: 0;
+}
+
+.restaurant-list-item-recommend {
+  width: 2em;
+  height: 2em;
 }
 
 .restaurant-modal {

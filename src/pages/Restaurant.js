@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
+import MaterialIcon, {colorPallet} from 'material-icons-react'
 // import RestaurantItem from '../components/RestaurantItem'
 import data from '../data/data'
 import './Restaurant.css'
@@ -62,15 +63,46 @@ class Restaurant extends React.Component {
         <div>
           <h1 className='restaurant-name'>{restaurant.name}</h1>
           <div className='restaurant-list'>
-            {restaurant.items.map((item, i) =>
-              <div
-                key={i}
-                className='restaurant-list-item'
-                onClick={() => this.openModal()}
-              >
-                {item}
-              </div>
-            )}
+            {restaurant.items.map((item, i) => {
+              const {recommend} = item;
+              let recommendIcon;
+              if(recommend == 1) {
+                recommendIcon = (
+                  <MaterialIcon
+                    className='restaurant-list-item-recommend'
+                    icon='check_circle'
+                    color={colorPallet.green}
+                  />
+                )
+              } else if(recommend == -1) {
+                recommendIcon = (
+                  <MaterialIcon
+                    className='restaurant-list-item-recommend'
+                    icon='cancel'
+                    color={colorPallet.red}
+                  />
+                )
+              } else {
+                recommendIcon = (
+                  <MaterialIcon
+                    className='restaurant-list-item-recommend'
+                    icon='help'
+                    color={colorPallet.grey}
+                  />
+                )
+              }
+              return (
+                <div
+                  key={i}
+                  className='restaurant-list-item'
+                  onClick={() => this.openModal()}
+                >
+                  <div className='restaurant-list-item-fill'/>
+                  <p className='restaurant-list-item-name'>{item.name}</p>
+                  {recommendIcon}
+                </div>
+              )
+            })}
           </div>
           <Modal
             isOpen={this.state.modalIsOpen}

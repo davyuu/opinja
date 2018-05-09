@@ -17,8 +17,8 @@
   width: 10em;
   margin: 1em auto;
   padding: 1em;
-  border: 2px solid black;
-  border-radius: 1em;
+  border: 2px solid grey;
+  border-radius: 2em;
   cursor: pointer;
 }
 
