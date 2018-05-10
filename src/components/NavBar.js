@@ -10,7 +10,12 @@ class NavBar extends React.Component {
 			<div className='nav-bar'>
 				<header className='nav-header'>
 					<div className='nav-links'>
-						<Link to={routes.home}>Home</Link>
+						<Link
+							className='nav-link'
+							to={routes.home}
+						>
+							Home
+						</Link>
 					</div>
 					<img src={logo} className='nav-logo' alt='logo' />
 					<h1 className='nav-title'>Welcome to IsPoll</h1>

@@ -71,7 +71,7 @@ class Restaurant extends React.Component {
                   <MaterialIcon
                     className='restaurant-list-item-recommend'
                     icon='check_circle'
-                    color={colorPallet.green}
+                    color={colorPallet.green._500}
                   />
                 )
               } else if(recommend == -1) {
@@ -79,7 +79,7 @@ class Restaurant extends React.Component {
                   <MaterialIcon
                     className='restaurant-list-item-recommend'
                     icon='cancel'
-                    color={colorPallet.red}
+                    color={colorPallet.red._500}
                   />
                 )
               } else {
@@ -87,7 +87,6 @@ class Restaurant extends React.Component {
                   <MaterialIcon
                     className='restaurant-list-item-recommend'
                     icon='help'
-                    color={colorPallet.grey}
                   />
                 )
               }

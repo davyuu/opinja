@@ -9,11 +9,11 @@ const data = [
 			},
 			{
 				name: 'item2',
-				recommend: 0
+				recommend: 1
 			},
 			{
 				name: 'item3',
-				recommend: 0
+				recommend: -1
 			}
 		]
 	},
