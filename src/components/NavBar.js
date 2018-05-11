@@ -4,7 +4,7 @@ import routes from '../constants/routes'
 import logo from '../images/logo.svg'
 import './NavBar.css'
 
-class NavBar extends React.Component {
+export default class NavBar extends React.Component {
 	render() {
 		return (
 			<div className='nav-bar'>
@@ -24,5 +24,3 @@ class NavBar extends React.Component {
 		)
 	}
 }
-
-export default NavBar

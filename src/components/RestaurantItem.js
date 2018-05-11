@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './RestaurantItem.css'
 
-class RestaurantItem extends React.Component {
+export default class RestaurantItem extends React.Component {
 	render() {
 		return (
 			<div className='restaurant-item'>
@@ -15,5 +15,3 @@ class RestaurantItem extends React.Component {
 RestaurantItem.propTypes = {
 	item: PropTypes.string.isRequired
 }
-
-export default RestaurantItem

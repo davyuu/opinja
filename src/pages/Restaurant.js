@@ -7,7 +7,7 @@ import './Restaurant.css'
 
 Modal.setAppElement('#root')
 
-class Restaurant extends React.Component {
+export default class Restaurant extends React.Component {
   constructor(props) {
     super(props);
 
@@ -58,16 +58,16 @@ class Restaurant extends React.Component {
 
   onRecommendChange(e) {
     const value = e.currentTarget.value;
-    if (value == '1') {
+    if (value === '1') {
       this.setState({recommend: 1})
-    } else if (value == '-1') {
+    } else if (value === '-1') {
       this.setState({recommend: -1})
     }
   }
 
   onRecommendSubmit() {
     const {restaurant, selectedItem, recommend} = this.state;
-    if (recommend == 0) {
+    if (recommend === 0) {
       alert('Please select an option')
       console.log("test1")
       return
@@ -75,10 +75,10 @@ class Restaurant extends React.Component {
 
     console.log("test2")
 
-    data.map(r => {
-      if(r.id == restaurant.id) {
-        r.items.map(i => {
-          if(i.id == selectedItem.id) {
+    data.forEach(r => {
+      if(r.id === restaurant.id) {
+        r.items.forEach(i => {
+          if(i.id === selectedItem.id) {
             i.recommend = recommend;
           }
         })
@@ -113,13 +113,13 @@ class Restaurant extends React.Component {
                 type='radio'
                 id='yes'
                 name='recommend'
-                checked={recommend == 1}
+                checked={recommend === 1}
                 onChange={this.onRecommendChange}
               value='1' />
               <label htmlFor='yes'>
                 <MaterialIcon
                   icon='check_circle_outline'
-                  color={recommend == 1 ? colorPallet.green._500 : null}
+                  color={recommend === 1 ? colorPallet.green._500 : null}
                   size={100}
                 />
               </label>
@@ -129,13 +129,13 @@ class Restaurant extends React.Component {
                 type='radio'
                 id='no'
                 name='recommend'
-                checked={recommend == -1}
+                checked={recommend === -1}
                 onChange={this.onRecommendChange}
               value='-1' />
               <label htmlFor='no'>
                 <MaterialIcon
                   icon='highlight_off'
-                  color={recommend == -1 ? colorPallet.red._500 : null}
+                  color={recommend === -1 ? colorPallet.red._500 : null}
                   size={100}
                 />
               </label>
@@ -160,7 +160,7 @@ class Restaurant extends React.Component {
             {restaurant.items.map((item, i) => {
               const {recommend} = item;
               let recommendIcon;
-              if(recommend == 1) {
+              if(recommend === 1) {
                 recommendIcon = (
                   <MaterialIcon
                     className='restaurant-list-item-recommend'
@@ -168,7 +168,7 @@ class Restaurant extends React.Component {
                     color={colorPallet.green._500}
                   />
                 )
-              } else if(recommend == -1) {
+              } else if(recommend === -1) {
                 recommendIcon = (
                   <MaterialIcon
                     className='restaurant-list-item-recommend'
@@ -212,5 +212,3 @@ class Restaurant extends React.Component {
     )
   }
 }
-
-export default Restaurant
