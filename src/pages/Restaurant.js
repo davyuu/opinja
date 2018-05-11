@@ -5,16 +5,7 @@ import MaterialIcon, {colorPallet} from 'material-icons-react'
 import data from '../data/data'
 import './Restaurant.css'
 
-const customStyles = {
-  content : {
-    top                   : '80%',
-    // left                  : '50%',
-    // right                 : 'auto',
-    // bottom                : 'auto',
-    // marginRight           : '-50%',
-    // transform             : 'translate(-50%, -50%)'
-  }
-};
+Modal.setAppElement('#root')
 
 class Restaurant extends React.Component {
   constructor(props) {
@@ -22,11 +13,15 @@ class Restaurant extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      restaurant: null
+      restaurant: null,
+      selectedItem: null,
+      recommend: 0,
     }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.onRecommendChange = this.onRecommendChange.bind(this);
+    this.onRecommendSubmit = this.onRecommendSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +43,49 @@ class Restaurant extends React.Component {
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({
+      modalIsOpen: false,
+      recommend: 0
+    });
+  }
+
+  onItemClick(item) {
+    this.setState({
+      selectedItem: item,
+      recommend: item.recommend
+    }, () => this.openModal())
+  }
+
+  onRecommendChange(e) {
+    const value = e.currentTarget.value;
+    if (value == '1') {
+      this.setState({recommend: 1})
+    } else if (value == '-1') {
+      this.setState({recommend: -1})
+    }
+  }
+
+  onRecommendSubmit() {
+    const {restaurant, selectedItem, recommend} = this.state;
+    if (recommend == 0) {
+      alert('Please select an option')
+      console.log("test1")
+      return
+    }
+
+    console.log("test2")
+
+    data.map(r => {
+      if(r.id == restaurant.id) {
+        r.items.map(i => {
+          if(i.id == selectedItem.id) {
+            i.recommend = recommend;
+          }
+        })
+      }
+    })
+
+    this.closeModal()
   }
 
   renderInvalid() {
@@ -56,7 +93,64 @@ class Restaurant extends React.Component {
   }
 
   render() {
-    const {restaurant} = this.state;
+    const {restaurant, selectedItem, recommend} = this.state;
+
+    const itemName = selectedItem ? selectedItem.name : 'this item';
+    const modal = (
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        onRequestClose={this.closeModal}
+        className='restaurant-modal'
+        overlayClassName='restaurant-modal-overlay'
+      >
+        <div className='restaurant-recommend-container'>
+          <p className='restaurant-recommend-title'>
+            {`Would you recommend ${itemName}?`}
+          </p>
+          <div className='restaurant-recommend'>
+            <div>
+              <input
+                type='radio'
+                id='yes'
+                name='recommend'
+                checked={recommend == 1}
+                onChange={this.onRecommendChange}
+              value='1' />
+              <label htmlFor='yes'>
+                <MaterialIcon
+                  icon='check_circle_outline'
+                  color={recommend == 1 ? colorPallet.green._500 : null}
+                  size={100}
+                />
+              </label>
+            </div>
+            <div>
+              <input
+                type='radio'
+                id='no'
+                name='recommend'
+                checked={recommend == -1}
+                onChange={this.onRecommendChange}
+              value='-1' />
+              <label htmlFor='no'>
+                <MaterialIcon
+                  icon='highlight_off'
+                  color={recommend == -1 ? colorPallet.red._500 : null}
+                  size={100}
+                />
+              </label>
+            </div>
+          </div>
+          <div
+            className='restaurant-recommend-submit'
+            onClick={this.onRecommendSubmit}
+          >
+            Submit
+          </div>
+        </div>
+      </Modal>
+    )
+
     let content;
     if (restaurant) {
       content = (
@@ -94,7 +188,7 @@ class Restaurant extends React.Component {
                 <div
                   key={i}
                   className='restaurant-list-item'
-                  onClick={() => this.openModal()}
+                  onClick={() => this.onItemClick(item)}
                 >
                   <div className='restaurant-list-item-fill'/>
                   <p className='restaurant-list-item-name'>{item.name}</p>
@@ -103,15 +197,7 @@ class Restaurant extends React.Component {
               )
             })}
           </div>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            >
-            <div className='restaurant-modal'>
-              TEST
-            </div>
-          </Modal>
+          {modal}
         </div>
       )
     } else {
