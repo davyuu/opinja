@@ -1,0 +1,108 @@
+.restaurant {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.restaurant-name {
+  padding: 0;
+}
+
+.restaurant-list-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 10em;
+  margin: 1em auto;
+  padding: 1em;
+  border: 2px solid grey;
+  border-radius: 2em;
+  cursor: pointer;
+}
+
+.restaurant-list-item-fill {
+  width: 2em;
+  height: 2em;
+}
+
+.restaurant-list-item-name {
+  margin: 0;
+  padding: 0;
+}
+
+.restaurant-list-item-recommend {
+  width: 2em;
+  height: 2em;
+}
+
+.restaurant-modal {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0%;
+  right: 0%;
+  border: none;
+  background-color: white;
+}
+
+.restaurant-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.restaurant-recommend-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.restaurant-recommend {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.restaurant-recommend-title {
+  margin: 1em;
+  font-size: 1.2em;
+}
+
+.restaurant-recommend input[type='radio'] {
+  display:none;
+}
+
+.restaurant-recommend input[type='radio']#yes:checked + label {
+  color: #4CAF50;
+}
+
+.restaurant-recommend input[type='radio']#no:checked + label {
+  color: #F44336;
+}
+
+.restaurant-recommend label {
+  display: block;
+  margin: 1em;
+  padding: -2em;
+  /* border: 1px solid grey; */
+  border-radius: 50%;
+  cursor:pointer;
+}
+
+.restaurant-recommend-submit {
+  width: 50%;
+  margin: 0.5em;
+  padding: 1em;
+  border: 2px solid grey;
+  border-radius: 2em;
+  text-align: center;
+  cursor: pointer;
+}

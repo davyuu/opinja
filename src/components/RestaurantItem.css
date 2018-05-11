@@ -1,0 +1,8 @@
+.restaurant-item {
+  width: 10em;
+  margin: 1em;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 1em;
+  cursor: pointer;
+}

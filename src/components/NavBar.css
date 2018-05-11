@@ -9,9 +9,14 @@
   color: white;
 }
 
+.nav-link {
+  cursor: pointer;
+}
+
 .nav-logo {
   animation: nav-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 100px;
+  width: 100px;
 }
 
 .nav-title {
