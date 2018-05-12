@@ -1,13 +1,13 @@
 import React from 'react'
+import gql from 'graphql-tag'
+import {graphql} from 'react-apollo'
 import Modal from 'react-modal'
 import MaterialIcon, {colorPallet} from 'material-icons-react'
-// import RestaurantItem from '../components/RestaurantItem'
-import data from '../data/data'
 import './Restaurant.css'
 
 Modal.setAppElement('#root')
 
-export default class Restaurant extends React.Component {
+class Restaurant extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,20 +22,6 @@ export default class Restaurant extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.onRecommendChange = this.onRecommendChange.bind(this);
     this.onRecommendSubmit = this.onRecommendSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    const {id} = this.props.match.params;
-    let isValid = false;
-    data.forEach((restaurant) => {
-      if(Number(id) === restaurant.id) {
-        isValid = true;
-        this.setState({restaurant: restaurant})
-      }
-    })
-    if(!isValid) {
-      this.renderInvalid()
-    }
   }
 
   openModal() {
@@ -69,32 +55,27 @@ export default class Restaurant extends React.Component {
     const {restaurant, selectedItem, recommend} = this.state;
     if (recommend === 0) {
       alert('Please select an option')
-      console.log("test1")
       return
     }
 
-    console.log("test2")
-
-    data.forEach(r => {
-      if(r.id === restaurant.id) {
-        r.items.forEach(i => {
-          if(i.id === selectedItem.id) {
-            i.recommend = recommend;
-          }
-        })
-      }
-    })
+    //todo
 
     this.closeModal()
   }
 
-  renderInvalid() {
-    alert('invalid id')
-  }
-
   render() {
-    const {restaurant, selectedItem, recommend} = this.state;
+    const {data} = this.props
+    if(data.loading) return <p>Loading...</p>
 
+    const {restaurant} = data
+
+    if(!restaurant) {
+      return (
+        <p>No Restaurant Found</p>
+      )
+    }
+
+    const {selectedItem, recommend} = this.state;
     const itemName = selectedItem ? selectedItem.name : 'this item';
     const modal = (
       <Modal
@@ -151,64 +132,76 @@ export default class Restaurant extends React.Component {
       </Modal>
     )
 
-    let content;
-    if (restaurant) {
-      content = (
-        <div>
-          <h1 className='restaurant-name'>{restaurant.name}</h1>
-          <div className='restaurant-list'>
-            {restaurant.items.map((item, i) => {
-              const {recommend} = item;
-              let recommendIcon;
-              if(recommend === 1) {
-                recommendIcon = (
-                  <MaterialIcon
-                    className='restaurant-list-item-recommend'
-                    icon='check_circle'
-                    color={colorPallet.green._500}
-                  />
-                )
-              } else if(recommend === -1) {
-                recommendIcon = (
-                  <MaterialIcon
-                    className='restaurant-list-item-recommend'
-                    icon='cancel'
-                    color={colorPallet.red._500}
-                  />
-                )
-              } else {
-                recommendIcon = (
-                  <MaterialIcon
-                    className='restaurant-list-item-recommend'
-                    icon='help'
-                  />
-                )
-              }
-              return (
-                <div
-                  key={i}
-                  className='restaurant-list-item'
-                  onClick={() => this.onItemClick(item)}
-                >
-                  <div className='restaurant-list-item-fill'/>
-                  <p className='restaurant-list-item-name'>{item.name}</p>
-                  {recommendIcon}
-                </div>
-              )
-            })}
-          </div>
-          {modal}
-        </div>
-      )
-    } else {
-      content = (
-        <div>No Restaurant Found</div>
-      )
-    }
     return (
       <div className='restaurant'>
-        {content}
+        <h1 className='restaurant-name'>{restaurant.name}</h1>
+        <div className='restaurant-list'>
+          {restaurant.items.map((item, i) => {
+            const {recommend} = item;
+            let recommendIcon;
+            if(recommend === 1) {
+              recommendIcon = (
+                <MaterialIcon
+                  className='restaurant-list-item-recommend'
+                  icon='check_circle'
+                  color={colorPallet.green._500}
+                />
+              )
+            } else if(recommend === -1) {
+              recommendIcon = (
+                <MaterialIcon
+                  className='restaurant-list-item-recommend'
+                  icon='cancel'
+                  color={colorPallet.red._500}
+                />
+              )
+            } else {
+              recommendIcon = (
+                <MaterialIcon
+                  className='restaurant-list-item-recommend'
+                  icon='help'
+                />
+              )
+            }
+            return (
+              <div
+                key={i}
+                className='restaurant-list-item'
+                onClick={() => this.onItemClick(item)}
+              >
+                <div className='restaurant-list-item-fill'/>
+                <p className='restaurant-list-item-name'>{item.name}</p>
+                {recommendIcon}
+              </div>
+            )
+          })}
+        </div>
+        {modal}
       </div>
     )
   }
 }
+
+const query = gql`
+  query getRestaurant($id: Int!) {
+    restaurant(id: $id) {
+      id
+      name
+      items {
+        id
+        name
+        recommend
+      }
+    }
+  }
+`
+
+const queryOptions = {
+  options: props => ({
+    variables: {
+      id: props.match.params.id
+    }
+  })
+}
+
+export default graphql(query, queryOptions)(Restaurant)
