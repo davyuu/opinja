@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import Modal from 'react-modal'
 import MaterialIcon, {colorPallet} from 'material-icons-react'
+import StarRatingComponent from 'react-star-rating-component';
+import ReactStars from 'react-stars'
 import './Restaurant.css'
 
 Modal.setAppElement('#root')
@@ -15,13 +17,13 @@ class Restaurant extends React.Component {
       modalIsOpen: false,
       restaurant: null,
       selectedItem: null,
-      recommend: 0,
+      rating: null,
     }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.onRecommendChange = this.onRecommendChange.bind(this);
-    this.onRecommendSubmit = this.onRecommendSubmit.bind(this);
+    this.onRatingChange = this.onRatingChange.bind(this);
+    this.onRatingSubmit = this.onRatingSubmit.bind(this);
   }
 
   openModal() {
@@ -31,29 +33,24 @@ class Restaurant extends React.Component {
   closeModal() {
     this.setState({
       modalIsOpen: false,
-      recommend: 0
+      rating: null
     });
   }
 
   onItemClick(item) {
     this.setState({
       selectedItem: item,
-      recommend: item.recommend
+      rating: item.rating
     }, () => this.openModal())
   }
 
-  onRecommendChange(e) {
-    const value = e.currentTarget.value;
-    if (value === '1') {
-      this.setState({recommend: 1})
-    } else if (value === '-1') {
-      this.setState({recommend: -1})
-    }
+  onRatingChange(rating) {
+    this.setState({rating: rating})
   }
 
-  onRecommendSubmit() {
-    const {restaurant, selectedItem, recommend} = this.state;
-    if (recommend === 0) {
+  onRatingSubmit() {
+    const {restaurant, selectedItem, rating} = this.state;
+    if (rating === null) {
       alert('Please select an option')
       return
     }
@@ -75,7 +72,7 @@ class Restaurant extends React.Component {
       )
     }
 
-    const {selectedItem, recommend} = this.state;
+    const {selectedItem, rating} = this.state;
     const itemName = selectedItem ? selectedItem.name : 'this item';
     const modal = (
       <Modal
@@ -84,47 +81,24 @@ class Restaurant extends React.Component {
         className='restaurant-modal'
         overlayClassName='restaurant-modal-overlay'
       >
-        <div className='restaurant-recommend-container'>
-          <p className='restaurant-recommend-title'>
-            {`Would you recommend ${itemName}?`}
+        <div className='restaurant-rating-container'>
+          <p className='restaurant-rating-title'>
+            How would you rate
           </p>
-          <div className='restaurant-recommend'>
-            <div>
-              <input
-                type='radio'
-                id='yes'
-                name='recommend'
-                checked={recommend === 1}
-                onChange={this.onRecommendChange}
-              value='1' />
-              <label htmlFor='yes'>
-                <MaterialIcon
-                  icon='check_circle_outline'
-                  color={recommend === 1 ? colorPallet.green._500 : null}
-                  size={100}
-                />
-              </label>
-            </div>
-            <div>
-              <input
-                type='radio'
-                id='no'
-                name='recommend'
-                checked={recommend === -1}
-                onChange={this.onRecommendChange}
-              value='-1' />
-              <label htmlFor='no'>
-                <MaterialIcon
-                  icon='highlight_off'
-                  color={recommend === -1 ? colorPallet.red._500 : null}
-                  size={100}
-                />
-              </label>
-            </div>
+          <p className="restaurant-rating-title">
+            {itemName}?
+          </p>
+          <div className='restaurant-rating'>
+            <ReactStars
+              count={5}
+              value={rating}
+              onChange={this.onRatingChange}
+              size={60}
+            />
           </div>
           <div
-            className='restaurant-recommend-submit'
-            onClick={this.onRecommendSubmit}
+            className='restaurant-rating-submit'
+            onClick={this.onRatingSubmit}
           >
             Submit
           </div>

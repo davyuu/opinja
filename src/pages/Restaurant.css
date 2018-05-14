@@ -38,6 +38,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 2px;
   /* padding: 3px; */
   /* border: 1px solid grey; */
   /* border-radius: 0.5em; */
@@ -73,48 +74,28 @@
   background-color: rgba(0,0,0,0.3);
 }
 
-.restaurant-recommend-container {
+.restaurant-rating-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1em;
 }
 
-.restaurant-recommend {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
+.restaurant-rating-title {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
 }
 
-.restaurant-recommend-title {
-  margin: 1em;
-  font-size: 1.2em;
+.restaurant-rating {
 }
 
-.restaurant-recommend input[type='radio'] {
-  display:none;
+.restaurant-rating span {
+  margin: 5px;
 }
 
-.restaurant-recommend input[type='radio']#yes:checked + label {
-  color: #4CAF50;
-}
-
-.restaurant-recommend input[type='radio']#no:checked + label {
-  color: #F44336;
-}
-
-.restaurant-recommend label {
-  display: block;
-  margin: 1em;
-  padding: -2em;
-  /* border: 1px solid grey; */
-  border-radius: 50%;
-  cursor:pointer;
-}
-
-.restaurant-recommend-submit {
+.restaurant-rating-submit {
   width: 50%;
   margin: 0.5em;
   padding: 1em;
