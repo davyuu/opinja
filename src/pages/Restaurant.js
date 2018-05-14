@@ -1,9 +1,8 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import {graphql} from 'react-apollo'
+import {graphql, compose} from 'react-apollo'
 import Modal from 'react-modal'
 import MaterialIcon, {colorPallet} from 'material-icons-react'
-import StarRatingComponent from 'react-star-rating-component';
 import ReactStars from 'react-stars'
 import './Restaurant.css'
 
@@ -15,8 +14,7 @@ class Restaurant extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      restaurant: null,
-      selectedItem: null,
+      item: null,
       rating: null,
     }
 
@@ -39,7 +37,7 @@ class Restaurant extends React.Component {
 
   onItemClick(item) {
     this.setState({
-      selectedItem: item,
+      item: item,
       rating: item.rating
     }, () => this.openModal())
   }
@@ -49,13 +47,25 @@ class Restaurant extends React.Component {
   }
 
   onRatingSubmit() {
-    const {restaurant, selectedItem, rating} = this.state;
+    const {item, rating} = this.state;
     if (rating === null) {
       alert('Please select an option')
       return
     }
 
-    //todo
+    this.props.mutate({
+      variables: {
+        itemId: item.id,
+        rating: rating
+      },
+      update: (store, {data: {vote}}) => {
+        this.props.getRestaurant(this.props.data.restaurant.id)
+      }
+    }).then(({data}) => {
+      console.log('success', data)
+    }).catch(error => {
+      console.log('error', error)
+    })
 
     this.closeModal()
   }
@@ -72,8 +82,8 @@ class Restaurant extends React.Component {
       )
     }
 
-    const {selectedItem, rating} = this.state;
-    const itemName = selectedItem ? selectedItem.name : 'this item';
+    const {item, rating} = this.state;
+    const itemName = item ? item.name : 'this item';
     const modal = (
       <Modal
         isOpen={this.state.modalIsOpen}
@@ -157,13 +167,26 @@ const query = gql`
     }
   }
 `
+const mutation = gql`
+  mutation addRating($itemId: Int!, $rating: Float!) {
+    addRating(itemId: $itemId, rating: $rating) {
+      id
+      itemId
+      rating
+    }
+  }
+`
 
 const queryOptions = {
   options: props => ({
     variables: {
       id: props.match.params.id
-    }
+    },
+    forceFetch: true
   })
 }
 
-export default graphql(query, queryOptions)(Restaurant)
+export default compose(
+  graphql(query, queryOptions),
+  graphql(mutation)
+)(Restaurant)
