@@ -7,15 +7,16 @@
 
 .restaurant-name {
   padding: 0;
+  margin: 0.5em 0 0 0;
 }
 
 .restaurant-list-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  width: 10em;
+  width: 15em;
   margin: 1em auto;
   padding: 1em;
   border: 2px solid grey;
@@ -33,9 +34,24 @@
   padding: 0;
 }
 
-.restaurant-list-item-recommend {
-  width: 2em;
-  height: 2em;
+.restaurant-list-item-rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* padding: 3px; */
+  /* border: 1px solid grey; */
+  /* border-radius: 0.5em; */
+}
+
+.restaurant-list-item-rating {
+  margin: 0;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.restaurant-list-item-star {
+  width: 5px;
+  height: 5px;
 }
 
 .restaurant-modal {

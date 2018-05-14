@@ -18,7 +18,6 @@ export default class NavBar extends React.Component {
 						</Link>
 					</div>
 					<img src={logo} className='nav-logo' alt='logo' />
-					<h1 className='nav-title'>Welcome to IsPoll</h1>
 				</header>
 			</div>
 		)

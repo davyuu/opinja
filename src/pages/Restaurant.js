@@ -137,30 +137,18 @@ class Restaurant extends React.Component {
         <h1 className='restaurant-name'>{restaurant.name}</h1>
         <div className='restaurant-list'>
           {restaurant.items.map((item, i) => {
-            const {recommend} = item;
-            let recommendIcon;
-            if(recommend === 1) {
-              recommendIcon = (
-                <MaterialIcon
-                  className='restaurant-list-item-recommend'
-                  icon='check_circle'
-                  color={colorPallet.green._500}
-                />
-              )
-            } else if(recommend === -1) {
-              recommendIcon = (
-                <MaterialIcon
-                  className='restaurant-list-item-recommend'
-                  icon='cancel'
-                  color={colorPallet.red._500}
-                />
-              )
-            } else {
-              recommendIcon = (
-                <MaterialIcon
-                  className='restaurant-list-item-recommend'
-                  icon='help'
-                />
+            let rating;
+            if(item.rating) {
+              rating = (
+                <div className='restaurant-list-item-rating-container'>
+                  <p className='restaurant-list-item-rating'>{item.rating}</p>
+                  <MaterialIcon
+                    className='restaurant-list-item-star'
+                    icon='grade'
+                    color={colorPallet.yellow._500}
+                    size={16}
+                  />
+                </div>
               )
             }
             return (
@@ -169,9 +157,9 @@ class Restaurant extends React.Component {
                 className='restaurant-list-item'
                 onClick={() => this.onItemClick(item)}
               >
-                <div className='restaurant-list-item-fill'/>
+                {/* <div className='restaurant-list-item-fill'/> */}
                 <p className='restaurant-list-item-name'>{item.name}</p>
-                {recommendIcon}
+                {rating}
               </div>
             )
           })}
@@ -190,7 +178,7 @@ const query = gql`
       items {
         id
         name
-        recommend
+        rating
       }
     }
   }
