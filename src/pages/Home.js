@@ -1,29 +1,30 @@
 import React from 'react'
+import gql from 'graphql-tag'
+import {graphql} from 'react-apollo'
 import {Link} from 'react-router-dom'
-import data from '../data/data'
 import './Home.css'
 
 class Home extends React.Component {
 	render() {
+		const {data} = this.props
+		if(data.loading) return <p>Loading...</p>
+
+		const {restaurants} = data;
 		return (
 			<div className='home'>
 				<h1 className="home-title">
 					SELECT A RESTAURANT
 				</h1>
 				<div className='home-list'>
-					{data.map((restaurant, i) => {
+					{restaurants.map((restaurant, i) => {
 						return (
-							<div
+							<Link
 								key={i}
-								className='home-list-item'
+								className="home-list-item-link"
+								to={`/restaurant/${restaurant.id}`}
 							>
-								<Link
-									className="home-list-item-link"
-									to={`/restaurant/${restaurant.id}`}
-								>
-									{restaurant.name}
-								</Link>
-							</div>
+								{restaurant.name}
+							</Link>
 						)
 					})}
 				</div>
@@ -32,4 +33,11 @@ class Home extends React.Component {
 	}
 }
 
-export default Home
+const query = gql`{
+  restaurants {
+    id
+    name
+  }
+}`
+
+export default graphql(query)(Home)

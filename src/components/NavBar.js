@@ -4,7 +4,7 @@ import routes from '../constants/routes'
 import logo from '../images/logo.svg'
 import './NavBar.css'
 
-class NavBar extends React.Component {
+export default class NavBar extends React.Component {
 	render() {
 		return (
 			<div className='nav-bar'>
@@ -18,11 +18,8 @@ class NavBar extends React.Component {
 						</Link>
 					</div>
 					<img src={logo} className='nav-logo' alt='logo' />
-					<h1 className='nav-title'>Welcome to IsPoll</h1>
 				</header>
 			</div>
 		)
 	}
 }
-
-export default NavBar
