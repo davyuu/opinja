@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import Modal from 'react-modal'
 import ReactStars from 'react-stars'
+import {setLocalStorageRating} from '../utils/functions'
 import './RatingModal.css'
 
 Modal.setAppElement('#root')
@@ -15,6 +16,7 @@ class RatingModal extends React.Component {
     this.state = {
       modalIsOpen: false,
       item: null,
+      id: null,
       rating: null,
     }
 
@@ -24,7 +26,7 @@ class RatingModal extends React.Component {
     this.onRatingSubmit = this.onRatingSubmit.bind(this);
   }
 
-	componentDidMount() {
+  componentDidMount() {
     this.props.onRef(this)
   }
 
@@ -32,94 +34,96 @@ class RatingModal extends React.Component {
     this.props.onRef(undefined)
   }
 
-	openModal(item) {
-		this.setState({
-			modalIsOpen: true,
-			item: item,
-			rating: item.rating
-		});
-	}
+  openModal(item, id, rating) {
+    this.setState({
+      modalIsOpen: true,
+      item: item,
+      id: id,
+      rating: rating
+    });
+  }
 
-	closeModal() {
-		this.setState({
-			modalIsOpen: false,
-			item: null,
-			rating: null
-		});
-	}
+  closeModal() {
+    this.setState({
+      modalIsOpen: false,
+      item: null,
+      id: null,
+      rating: null
+    });
+  }
 
-	onRatingChange(rating) {
-		this.setState({rating: rating})
-	}
+  onRatingChange(rating) {
+    this.setState({rating: rating})
+  }
 
-	onRatingSubmit() {
-		const {item, rating} = this.state;
-		if (rating === null) {
-			alert('Please select an option')
-			return
-		}
+  onRatingSubmit() {
+    const {item, id, rating} = this.state;
+    if (rating === null) {
+      alert('Please select an option')
+      return
+    }
 
-		this.props.mutate({
-			variables: {
-				itemId: item.id,
-				rating: rating
-			},
-		}).then(({data}) => {
-			console.log('success', data)
-			this.props.refresh();
-		}).catch(error => {
-			console.log('error', error)
-		})
+    this.props.mutate({
+      variables: {
+        id: id,
+        itemId: item.id,
+        rating: rating
+      },
+    }).then(({data}) => {
+      this.props.refresh();
+      setLocalStorageRating(data.addRating.id, item.id, rating)
+    }).catch(error => {
+    })
 
-		this.closeModal()
-	}
+    this.closeModal()
+  }
 
 
-	render() {
+  render() {
     const {item, rating} = this.state;
     const itemName = item ? item.name : 'this item';
-		return (
+    return (
       <Modal
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         className='rating-modal'
         overlayClassName='rating-modal-overlay'
       >
-				<div className='rating-modal-container'>
-					<p className='rating-modal-title'>
-						How would you rate
-					</p>
-					<p className="rating-modal-title">
-						{itemName}?
-					</p>
-					<div className='rating-modal-stars'>
-						<ReactStars
-							count={5}
-							value={rating}
-							onChange={this.onRatingChange}
-							size={60}
-						/>
-					</div>
-					<div
-						className='rating-modal-submit'
-						onClick={this.onRatingSubmit}
-					>
-						Submit
-					</div>
-				</div>
-			</Modal>
-		)
-	}
+        <div className='rating-modal-container'>
+          <p className='rating-modal-title'>
+            How would you rate
+          </p>
+          <p className="rating-modal-title">
+            {itemName}?
+          </p>
+          <div className='rating-modal-stars'>
+            <ReactStars
+              count={5}
+              value={rating}
+              onChange={this.onRatingChange}
+              size={60}
+            />
+          </div>
+          <div
+            className='rating-modal-submit'
+            onClick={this.onRatingSubmit}
+          >
+            Submit
+          </div>
+        </div>
+      </Modal>
+    )
+  }
 }
 
 RatingModal.propTypes = {
-	onRef: PropTypes.func.isRequired,
-	refresh: PropTypes.func.isRequired
+  onRef: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired
 }
 
 const MUTATION_RATING = gql`
-  mutation addRating($itemId: Int!, $rating: Float!) {
-    addRating(itemId: $itemId, rating: $rating) {
+  mutation addRating($id: Int, $itemId: Int!, $rating: Float!) {
+    addRating(id: $id, itemId: $itemId, rating: $rating) {
       id
       itemId
       rating

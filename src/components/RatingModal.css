@@ -27,14 +27,11 @@
 
 .rating-modal-title {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.4em;
   text-align: center;
 }
 
-.rating-modal {
-}
-
-.rating-modal span {
+.rating-modal-stars span {
   margin: 5px;
 }
 
