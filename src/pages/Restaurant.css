@@ -34,7 +34,11 @@
   padding: 0;
 }
 
-.restaurant-list-item-rating-container {
+.restaurant-list-item-user-rating span {
+  margin: 0 2px;
+}
+
+.restaurant-list-item-overall-rating-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,13 +48,19 @@
   /* border-radius: 0.5em; */
 }
 
-.restaurant-list-item-rating {
+.restaurant-list-item-overall-rating {
   margin: 0;
   text-decoration: none;
   font-size: 12px;
 }
 
-.restaurant-list-item-star {
+.restaurant-list-item-overall-rating-star {
   width: 5px;
   height: 5px;
+}
+
+.restaurant-list-item-overall-rating-avg {
+  margin: 0;
+  text-decoration: none;
+  font-size: 10px;
 }

@@ -1,8 +1,11 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
+import ReactStars from 'react-stars'
 import MaterialIcon, {colorPallet} from 'material-icons-react'
 import RatingModal from '../components/RatingModal'
+import {getLocalStorageRatings} from '../utils/functions'
+import keys from '../constants/keys'
 import './Restaurant.css'
 
 class Restaurant extends React.Component {
@@ -17,22 +20,42 @@ class Restaurant extends React.Component {
       )
     }
 
+    const ratings = getLocalStorageRatings();
+
     return (
       <div className='restaurant'>
         <h1 className='restaurant-name'>{restaurant.name}</h1>
         <div className='restaurant-list'>
           {restaurant.items.map((item, i) => {
-            let rating;
-            if(item.rating) {
-              rating = (
-                <div className='restaurant-list-item-rating-container'>
-                  <p className='restaurant-list-item-rating'>{item.rating}</p>
+            let userRatingView;
+            let userRatingId;
+            let userRating;
+            if(ratings[item.id]) {
+              userRatingId = ratings[item.id][keys.RATING_ID_KEY]
+              userRating = ratings[item.id][keys.RATING_VALUE_KEY]
+              userRatingView = (
+                <div className='restaurant-list-item-user-rating'>
+                  <ReactStars
+                    count={5}
+                    value={userRating}
+                    edit={false}
+                    size={16}
+                  />
+                </div>
+              )
+            }
+            let overallRatingView;
+            if(item.overallRating) {
+              overallRatingView = (
+                <div className='restaurant-list-item-overall-rating-container'>
+                  <p className='restaurant-list-item-overall-rating'>{item.overallRating}</p>
                   <MaterialIcon
-                    className='restaurant-list-item-star'
+                    className='restaurant-list-item-overall-rating-star'
                     icon='grade'
                     color={colorPallet.yellow._500}
                     size={16}
                   />
+                  <p className='restaurant-list-item-overall-rating-avg'>avg</p>
                 </div>
               )
             }
@@ -40,11 +63,12 @@ class Restaurant extends React.Component {
               <div
                 key={i}
                 className='restaurant-list-item'
-                onClick={() => this.modal.openModal(item)}
+                onClick={() => this.modal.openModal(item, userRatingId, userRating)}
               >
                 {/* <div className='restaurant-list-item-fill'/> */}
                 <p className='restaurant-list-item-name'>{item.name}</p>
-                {rating}
+                {userRatingView}
+                {overallRatingView}
               </div>
             )
           })}
@@ -66,7 +90,7 @@ const QUERY_RESTAURANTS = gql`
       items {
         id
         name
-        rating
+        overallRating
       }
     }
   }

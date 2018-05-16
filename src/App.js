@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from 'react-apollo'
-import {HashRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
 import Restaurant from './pages/Restaurant'
