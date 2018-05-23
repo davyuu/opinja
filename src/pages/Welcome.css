@@ -1,0 +1,21 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+}
+
+.welcome-signin {
+  margin: 1em auto;
+}
+
+.welcome-signin button {
+  font-weight: normal !important;
+  font-family: sans-serif !important;
+}
+
+.welcome-signin-guest {
+  margin: 1em auto;
+  text-decoration: underline;
+  cursor: pointer;
+}

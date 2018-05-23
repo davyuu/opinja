@@ -73,6 +73,7 @@ class RatingModal extends React.Component {
       this.props.refresh();
       setLocalStorageRating(data.addRating.id, item.id, rating)
     }).catch(error => {
+      alert(error)
     })
 
     this.closeModal()

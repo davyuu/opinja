@@ -18,3 +18,25 @@ export const setLocalStorageRating = (id, itemId, rating) => {
   }
   localStorage.setItem(keys.LOCAL_STORAGE_RATINGS_KEY, JSON.stringify(ratings))
 }
+
+export const getLocalStorageUser = () => {
+  return JSON.parse(localStorage.getItem(keys.LOCAL_STORAGE_USER_KEY))
+}
+
+export const setLocalStorageUser = (user) => {
+  localStorage.setItem(keys.LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
+}
+
+export const isLoggedIn = () => {
+  if (getLocalStorageUser()) {
+    console.log('logged in')
+    return true
+  }
+  console.log('not logged in')
+  return false
+}
+
+export const clearLocalStorage = () => {
+  console.log('clearLocalStorage')
+  localStorage.clear();
+}

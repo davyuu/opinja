@@ -2,35 +2,49 @@ import React from 'react'
 import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import {Link} from 'react-router-dom'
+import {getLocalStorageUser} from '../utils/functions'
+import routes from '../constants/routes'
 import './Home.css'
 
 class Home extends React.Component {
-	render() {
-		const {data} = this.props
-		if(data.loading) return <p>Loading...</p>
+  constructor(props){
+    super(props);
+    this.state = {
+      user: null
+    };
+  }
 
-		const {restaurants} = data;
-		return (
-			<div className='home'>
-				<h1 className="home-title">
-					SELECT A RESTAURANT
-				</h1>
-				<div className='home-list'>
-					{restaurants.map((restaurant, i) => {
-						return (
-							<Link
-								key={i}
-								className="home-list-item-link"
-								to={`/restaurant/${restaurant.id}`}
-							>
-								{restaurant.name}
-							</Link>
-						)
-					})}
-				</div>
-			</div>
-		)
-	}
+  componentDidMount() {
+    const user = getLocalStorageUser()
+    this.setState({user: user})
+  }
+
+  render() {
+    const {data} = this.props
+    if(data.loading) return <p>Loading...</p>
+
+    const {restaurants} = data;
+    const {user} = this.state
+    return (
+      <div className='home'>
+        <h1 className="home-title">Hello {user.name}</h1>
+        <h1 className="home-title">Select a restaurant</h1>
+        <div className='home-list'>
+          {restaurants.map((restaurant, i) => {
+            return (
+              <Link
+                key={i}
+                className="home-list-item-link"
+                to={`${routes.restaurant}/${restaurant.id}`}
+              >
+                {restaurant.name}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
 }
 
 const query = gql`{
