@@ -20,11 +20,18 @@ class Home extends React.Component {
   }
 
   render() {
+    const {user} = this.state
     const {data} = this.props
-    if(data.loading) return <p>Loading...</p>
+    if(data.loading || !user) return <p>Loading...</p>
 
     const {restaurants} = data;
-    const {user} = this.state
+
+    if(!restaurants) {
+      return (
+        <p>No Restaurants Found</p>
+      )
+    }
+
     return (
       <div className='home'>
         <h1 className="home-title">Hello {user.name}</h1>

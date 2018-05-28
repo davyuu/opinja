@@ -1,0 +1,33 @@
+.header-bar {
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  background-color: #222;
+}
+
+.header-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4em;
+  height: 4em;
+}
+
+.header-logo {
+  width: 4em;
+  height: 4em;
+}
+
+.nav-bar {
+  padding: 1em;
+}
+
+.nav-bar-link {
+  display: block;
+  margin: 1em;
+  font-size: 1.2em;
+  color: #000;
+  text-decoration: none;
+}

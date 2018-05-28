@@ -83,7 +83,7 @@ class Restaurant extends React.Component {
 }
 
 const QUERY_RESTAURANTS = gql`
-  query getRestaurant($id: Int!) {
+  query getRestaurant($id: String!) {
     restaurant(id: $id) {
       id
       name

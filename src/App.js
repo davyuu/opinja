@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from 'react-apollo'
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
-import NavBar from './components/NavBar'
+import HeaderBar from './components/HeaderBar'
 import Welcome from './pages/Welcome'
 import Home from './pages/Home'
 import Restaurant from './pages/Restaurant'
@@ -23,7 +23,7 @@ export default class App extends Component {
       <ApolloProvider client={client}>
         <Router>
           <div>
-            <NavBar/>
+            <HeaderBar/>
             <Route exact path={routes.welcome} component={Welcome}/>
             <PrivateRoute path={routes.home} component={Home}/>
             <PrivateRoute path={`${routes.restaurant}/:id`} component={Restaurant}/>
