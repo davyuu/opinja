@@ -3,10 +3,7 @@ import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from 'react-apollo'
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import HeaderBar from './components/HeaderBar'
-import Welcome from './pages/Welcome'
-import Home from './pages/Home'
-import Restaurant from './pages/Restaurant'
-// import NotFound from './pages/NotFound'
+import Pages from './pages'
 import routes from './constants/routes'
 import {isLoggedIn} from './utils/functions'
 import './App.css';
@@ -24,10 +21,11 @@ export default class App extends Component {
         <Router>
           <div>
             <HeaderBar/>
-            <Route exact path={routes.welcome} component={Welcome}/>
-            <PrivateRoute path={routes.home} component={Home}/>
-            <PrivateRoute path={`${routes.restaurant}/:id`} component={Restaurant}/>
-            {/*<Route path={routes.notFound} component={NotFound}/>*/}
+            <Route exact path={routes.welcome} component={Pages.Welcome}/>
+            <PrivateRoute path={routes.home} component={Pages.Home}/>
+            <PrivateRoute path={`${routes.restaurant}/:id`} component={Pages.Restaurant}/>
+            <PrivateRoute path={routes.profile} component={Pages.Profile}/>
+            <PrivateRoute path={routes.top} component={Pages.Top}/>
           </div>
         </Router>
       </ApolloProvider>

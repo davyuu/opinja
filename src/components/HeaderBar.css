@@ -13,6 +13,8 @@
   align-items: center;
   width: 4em;
   height: 4em;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .header-logo {
@@ -21,7 +23,10 @@
 }
 
 .nav-bar {
-  padding: 1em;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .nav-bar-link {
@@ -30,4 +35,14 @@
   font-size: 1.2em;
   color: #000;
   text-decoration: none;
+}
+
+.nav-bar-logout {
+  margin: 1em auto;
+  padding: 1em 2em;
+  border-radius: 0.5em;
+  font-size: 1.2em;
+  color: white;
+  background: blue;
+  cursor: pointer;
 }

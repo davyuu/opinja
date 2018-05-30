@@ -16,9 +16,13 @@ class Restaurant extends React.Component {
     items.forEach(item => {
       const category = item.category.name;
       if(!categories[category]) {
-        categories[category] = []
+        categories[category] = {
+          order: item.category.order,
+          items: []
+        }
       }
-      categories[category].push({
+      categories[category].items.push({
+        id: item.id,
         name: item.name,
         overallRating: item.overallRating
       })
@@ -38,7 +42,6 @@ class Restaurant extends React.Component {
 
     const {items} = restaurant
     const categories = this.getCategoriesMap(items)
-    console.log('categories', categories)
 
     const ratings = getLocalStorageRatings();
 
@@ -58,8 +61,10 @@ class Restaurant extends React.Component {
           Search Menu
         </div>
         <div className='restaurant-list'>
-          {Object.keys(categories).map((category, i) => {
-            const items = categories[category];
+          {Object.keys(categories).sort((a, b) => {
+            return categories[a].order - categories[b].order
+          }).map((category, i) => {
+            const items = categories[category].items;
             return(
               <div
                 key={i}
@@ -136,6 +141,7 @@ const QUERY_RESTAURANTS = gql`
         category {
           id
           name
+          order
         }
         overallRating
       }

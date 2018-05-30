@@ -1,4 +1,5 @@
 import keys from '../constants/keys'
+import routes from '../constants/routes'
 
 export const getLocalStorageRatings = () => {
   const ratings = JSON.parse(localStorage.getItem(keys.LOCAL_STORAGE_RATINGS_KEY))
@@ -34,6 +35,12 @@ export const isLoggedIn = () => {
   }
   console.log('not logged in')
   return false
+}
+
+export const logout = (push) => {
+  console.log('logging out')
+  clearLocalStorage()
+  push(routes.welcome)
 }
 
 export const clearLocalStorage = () => {

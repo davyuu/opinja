@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import Modal from 'react-modal'
 import ReactStars from 'react-stars'
-import {setLocalStorageRating} from '../utils/functions'
+import {setLocalStorageRating, getLocalStorageUser} from '../utils/functions'
 import './RatingModal.css'
 
 Modal.setAppElement('#root')
@@ -17,7 +17,7 @@ class RatingModal extends React.Component {
       modalIsOpen: false,
       item: null,
       id: null,
-      rating: null,
+      value: null,
     }
 
     this.openModal = this.openModal.bind(this);
@@ -34,12 +34,12 @@ class RatingModal extends React.Component {
     this.props.onRef(undefined)
   }
 
-  openModal(item, id, rating) {
+  openModal(item, id, value) {
     this.setState({
       modalIsOpen: true,
-      item: item,
-      id: id,
-      rating: rating
+      item,
+      id,
+      value
     });
   }
 
@@ -48,30 +48,33 @@ class RatingModal extends React.Component {
       modalIsOpen: false,
       item: null,
       id: null,
-      rating: null
+      value: null
     });
   }
 
-  onRatingChange(rating) {
-    this.setState({rating: rating})
+  onRatingChange(value) {
+    this.setState({value})
   }
 
   onRatingSubmit() {
-    const {item, id, rating} = this.state;
-    if (rating === null) {
+    const {item, id, value} = this.state;
+    if (value === null) {
       alert('Please select an option')
       return
     }
+
+    const user = getLocalStorageUser();
 
     this.props.mutate({
       variables: {
         id: id,
         itemId: item.id,
-        rating: rating
+        userId: user.id,
+        value: value
       },
     }).then(({data}) => {
       this.props.refresh();
-      setLocalStorageRating(data.addRating.id, item.id, rating)
+      setLocalStorageRating(data.addRating.id, item.id, value)
     }).catch(error => {
       alert(error)
     })
@@ -79,9 +82,8 @@ class RatingModal extends React.Component {
     this.closeModal()
   }
 
-
   render() {
-    const {item, rating} = this.state;
+    const {item, value} = this.state;
     const itemName = item ? item.name : 'this item';
     return (
       <Modal
@@ -100,7 +102,7 @@ class RatingModal extends React.Component {
           <div className='rating-modal-stars'>
             <ReactStars
               count={5}
-              value={rating}
+              value={value}
               onChange={this.onRatingChange}
               size={60}
             />
@@ -123,11 +125,16 @@ RatingModal.propTypes = {
 }
 
 const MUTATION_RATING = gql`
-  mutation addRating($id: Int, $itemId: Int!, $rating: Float!) {
-    addRating(id: $id, itemId: $itemId, rating: $rating) {
+  mutation addRating($id: String, $itemId: String!, $userId: String, $value: Float!){
+    addRating(id: $id, itemId: $itemId, userId: $userId, value: $value) {
       id
-      itemId
-      rating
+      item {
+        id
+      }
+      user {
+        id
+      }
+      value
     }
   }
 `

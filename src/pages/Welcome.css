@@ -1,21 +1,51 @@
 .welcome {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 1em;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: lightblue;
+}
+
+.welcome-logo {
+  width: 60%;
+  height: 60%;
 }
 
 .welcome-signin {
-  margin: 1em auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 1em;
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.welcome-signin button {
-  font-weight: normal !important;
-  font-family: sans-serif !important;
+.welcome-signin-button {
+  width: 70%;
+  margin: 1em;
+  padding: 1.5em 2em;
+  border-radius: 0.5em;
+  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+  color: white;
+}
+
+.welcome-facebook {
+  background: rgba(0, 0, 255, 0.7);
+}
+
+.welcome-google {
+  background: rgba(255, 0, 0, 0.7);
 }
 
 .welcome-signin-guest {
   margin: 1em auto;
   text-decoration: underline;
   cursor: pointer;
+  color: white;
 }
