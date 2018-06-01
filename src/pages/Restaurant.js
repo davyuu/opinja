@@ -4,71 +4,118 @@ import {graphql} from 'react-apollo'
 import ReactStars from 'react-stars'
 import MaterialIcon, {colorPallet} from 'material-icons-react'
 import RatingModal from '../components/RatingModal'
-import {getLocalStorageRatings} from '../utils/functions'
 import keys from '../constants/keys'
+import images from '../images'
+import {getLocalStorageRatings} from '../utils/functions'
 import './Restaurant.css'
 
 class Restaurant extends React.Component {
 
+  getCategoriesMap(items) {
+    const categories = {}
+    items.forEach(item => {
+      const category = item.category.name;
+      if(!categories[category]) {
+        categories[category] = {
+          order: item.category.order,
+          items: []
+        }
+      }
+      categories[category].items.push({
+        id: item.id,
+        name: item.name,
+        overallRating: item.overallRating
+      })
+    })
+    return categories
+  }
+
   render() {
     const {loading, restaurant, refetch} = this.props.data
-    if(loading) return <p>Loading...</p>
+    if(loading) return <div>Loading...</div>
 
     if(!restaurant) {
       return (
-        <p>No Restaurant Found</p>
+        <div>No Restaurant Found</div>
       )
     }
+
+    const {items} = restaurant
+    const categories = this.getCategoriesMap(items)
 
     const ratings = getLocalStorageRatings();
 
     return (
       <div className='restaurant'>
-        <h1 className='restaurant-name'>{restaurant.name}</h1>
+        <div className='restaurant-header'>
+          <img
+            src={images.placeholder}
+            alt='placeholder'
+          />
+          <div className='restaurant-header-title'>
+            <div className='restaurant-name'>{restaurant.name}</div>
+            <div className='restaurant-location'>{restaurant.location}</div>
+          </div>
+        </div>
+        <div className='restaurant-search'>
+          Search Menu
+        </div>
         <div className='restaurant-list'>
-          {restaurant.items.map((item, i) => {
-            let userRatingView;
-            let userRatingId;
-            let userRating;
-            if(ratings[item.id]) {
-              userRatingId = ratings[item.id][keys.RATING_ID_KEY]
-              userRating = ratings[item.id][keys.RATING_VALUE_KEY]
-              userRatingView = (
-                <div className='restaurant-list-item-user-rating'>
-                  <ReactStars
-                    count={5}
-                    value={userRating}
-                    edit={false}
-                    size={16}
-                  />
-                </div>
-              )
-            }
-            let overallRatingView;
-            if(item.overallRating) {
-              overallRatingView = (
-                <div className='restaurant-list-item-overall-rating-container'>
-                  <p className='restaurant-list-item-overall-rating'>{item.overallRating}</p>
-                  <MaterialIcon
-                    className='restaurant-list-item-overall-rating-star'
-                    icon='grade'
-                    color={colorPallet.yellow._500}
-                    size={16}
-                  />
-                  <p className='restaurant-list-item-overall-rating-avg'>avg</p>
-                </div>
-              )
-            }
-            return (
+          {Object.keys(categories).sort((a, b) => {
+            return categories[a].order - categories[b].order
+          }).map((category, i) => {
+            const items = categories[category].items;
+            return(
               <div
                 key={i}
-                className='restaurant-list-item'
-                onClick={() => this.modal.openModal(item, userRatingId, userRating)}
+                className='restaurant-category'
               >
-                {/* <div className='restaurant-list-item-fill'/> */}
-                <p className='restaurant-list-item-name'>{item.name}</p>
-                {userRatingView}
-                {overallRatingView}
+                <div className='restaurant-category-name'>{category}</div>
+                {items.map((item, i) => {
+                  let userRatingView;
+                  let userRatingId;
+                  let userRating;
+                  if(ratings[item.id]) {
+                    userRatingId = ratings[item.id][keys.RATING_ID_KEY]
+                    userRating = ratings[item.id][keys.RATING_VALUE_KEY]
+                    userRatingView = (
+                      <div className='restaurant-item-user-rating'>
+                        <ReactStars
+                          count={5}
+                          value={userRating}
+                          edit={false}
+                          size={16}
+                        />
+                      </div>
+                    )
+                  }
+                  let overallRatingView;
+                  if(item.overallRating) {
+                    overallRatingView = (
+                      <div className='restaurant-item-overall-rating-container'>
+                        <div className='restaurant-item-overall-rating'>{item.overallRating}</div>
+                        <MaterialIcon
+                          className='restaurant-item-overall-rating-star'
+                          icon='grade'
+                          color={colorPallet.yellow._500}
+                          size={16}
+                        />
+                        <div className='restaurant-item-overall-rating-avg'>avg</div>
+                      </div>
+                    )
+                  }
+                  return (
+                    <div
+                      key={i}
+                      className='restaurant-item'
+                      onClick={() => this.modal.openModal(item, userRatingId, userRating)}
+                    >
+                      <div className='restaurant-item-name'>{item.name}</div>
+                      {userRatingView}
+                      {overallRatingView}
+                    </div>
+                  )
+                })}
               </div>
             )
           })}
@@ -83,13 +130,19 @@ class Restaurant extends React.Component {
 }
 
 const QUERY_RESTAURANTS = gql`
-  query getRestaurant($id: Int!) {
+  query getRestaurant($id: String!) {
     restaurant(id: $id) {
       id
       name
+      location
       items {
         id
         name
+        category {
+          id
+          name
+          order
+        }
         overallRating
       }
     }
