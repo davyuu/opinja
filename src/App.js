@@ -8,8 +8,8 @@ import routes from './constants/routes'
 import {isLoggedIn} from './utils/functions'
 import './App.css';
 
-const BASE_URL = `http://localhost:4000`
-// const BASE_URL = `https://ispoll-server.herokuapp.com`
+// const BASE_URL = `http://localhost:4000`
+const BASE_URL = `https://ispoll-server.herokuapp.com`
 const client = new ApolloClient({
   uri: `${BASE_URL}/graphql`
 });
