@@ -37,6 +37,7 @@
 
 .profile-points {
   padding: 0.5em;
+  text-align: center;
 }
 
 .profile-points-label {
@@ -53,6 +54,14 @@
 
 .profile-social-value {
   color: #00008b;
+}
+
+.profile-set-value {
+  display: flex;
+  align-items: center;
+  color: lightgray;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 .profile-label {

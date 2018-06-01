@@ -3,7 +3,7 @@ import {Link, withRouter} from 'react-router-dom'
 import Dock from 'react-dock'
 import MaterialIcon from 'material-icons-react'
 import routes from '../constants/routes'
-import {isLoggedIn, logout} from '../utils/functions'
+import {getLocalStorageUser, isLoggedIn, logout} from '../utils/functions'
 import logo from '../images/logo.svg'
 import './HeaderBar.css'
 
@@ -27,7 +27,32 @@ class HeaderBar extends React.Component {
     if (!isLoggedIn()) {
       return null
     }
+
     const {isOpen} = this.state;
+    const user = getLocalStorageUser()
+
+    let profileIcon;
+    if(user.id){
+      profileIcon = (
+        <Link
+          className='header-button'
+          to={{
+            pathname: routes.profile,
+            state: {id: user.id}
+          }}
+        >
+          <MaterialIcon
+            icon='account_circle'
+            size={32}
+            invert
+          />
+        </Link>
+      )
+    } else {
+      profileIcon = (
+        <div className='header-profile'/>
+      )
+    }
 
     return (
       <div className='header-bar'>
@@ -48,16 +73,7 @@ class HeaderBar extends React.Component {
           >
             <img className='header-logo' src={logo} alt='logo' />
           </Link>
-          <Link
-            className='header-button'
-            to={routes.profile}
-          >
-            <MaterialIcon
-              icon='account_circle'
-              size={32}
-              invert
-            />
-          </Link>
+          {profileIcon}
         </div>
         <Dock
           isVisible={isOpen}
