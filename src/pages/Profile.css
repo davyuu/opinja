@@ -16,6 +16,13 @@
 }
 
 .profile-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10em;
+  width: 10em;
+  margin: 1em;
+  border-radius: 5em;
 }
 
 .profile-font {
@@ -77,9 +84,8 @@
 .profile-logout {
   margin: 1em;
   padding: 0.5em 1em;
-  background: #00008b;
   border-radius: 0.5em;
-  color: white;
-  font-size: 1.2em;
+  color: lightgrey;
+  font-size: 1em;
   font-weight: 700;
 }

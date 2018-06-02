@@ -9,10 +9,35 @@ import './Profile.css'
 class Profile extends React.Component {
 
   render() {
-    const {loading, user, refetch} = this.props.data
+    // const {loading, user, refetch} = this.props.data
+    const {loading, user} = this.props.data
     if(loading) return <div>Loading...</div>
 
-    console.log(user)
+    if(!user) {
+      return (
+        <div>No User Found</div>
+      )
+    }
+
+    let profilePic;
+    if(user.photoURL) {
+      profilePic = (
+        <img
+          className='profile-pic'
+          src={user.photoURL}
+          alt='profile'
+        />
+      )
+    } else {
+      profilePic = (
+        <div className="profile-pic">
+          <MaterialIcon
+            icon='account_circle'
+            size={160}
+          />
+        </div>
+      )
+    }
 
     let twitterHandle;
     if(user.twitterHandle) {
@@ -47,12 +72,7 @@ class Profile extends React.Component {
     return (
       <div className='profile'>
         <div className='profile-header'>
-          <div className='profile-pic'>
-            <MaterialIcon
-              icon='account_circle'
-              size={150}
-            />
-          </div>
+          {profilePic}
           <div className='profile-font profile-name'>{user.name}</div>
         </div>
         <div className='profile-type profile-font'>
