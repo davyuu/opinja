@@ -3,22 +3,47 @@ import {withRouter} from 'react-router-dom'
 import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import MaterialIcon from 'material-icons-react'
+import SocialHandleModal from '../components/SocialHandleModal'
+import keys from '../constants/keys'
 import {logout} from '../utils/functions'
 import './Profile.css'
 
 class Profile extends React.Component {
-
   render() {
     const {loading, user, refetch} = this.props.data
     if(loading) return <div>Loading...</div>
 
-    console.log(user)
+    if(!user) {
+      return (
+        <div>No User Found</div>
+      )
+    }
+
+    let profilePic;
+    if(user.photoURL) {
+      profilePic = (
+        <img
+          className='profile-pic'
+          src={user.photoURL}
+          alt='profile'
+        />
+      )
+    } else {
+      profilePic = (
+        <div className="profile-pic">
+          <MaterialIcon
+            icon='account_circle'
+            size={160}
+          />
+        </div>
+      )
+    }
 
     let twitterHandle;
     if(user.twitterHandle) {
       twitterHandle = (
         <div className='profile-social-value profile-font'>
-          @{user.instagramHandle}
+          @{user.twitterHandle}
         </div>
       )
     } else {
@@ -33,7 +58,7 @@ class Profile extends React.Component {
     if(user.instagramHandle) {
       instagramHandle = (
         <div className='profile-social-value profile-font'>
-          @{user.twitterHandle}
+          @{user.instagramHandle}
         </div>
       )
     } else {
@@ -47,12 +72,7 @@ class Profile extends React.Component {
     return (
       <div className='profile'>
         <div className='profile-header'>
-          <div className='profile-pic'>
-            <MaterialIcon
-              icon='account_circle'
-              size={150}
-            />
-          </div>
+          {profilePic}
           <div className='profile-font profile-name'>{user.name}</div>
         </div>
         <div className='profile-type profile-font'>
@@ -64,12 +84,18 @@ class Profile extends React.Component {
           <div className='profile-font'>{user.points}</div>
         </div>
         <div className='profile-divider'/>
-        <div className='profile-social'>
+        <div
+          className='profile-social'
+          onClick={() => this.modal.openModal(user.id, keys.TWITTER, user.twitterHandle)}
+        >
           <div className='profile-label profile-font'>Twitter:</div>
           {twitterHandle}
         </div>
         <div className='profile-divider'/>
-        <div className='profile-social'>
+        <div
+          className='profile-social'
+          onClick={() => this.modal.openModal(user.id, keys.INSTAGRAM, user.instagramHandle)}
+        >
           <div className='profile-label profile-font'>Instagram:</div>
           {instagramHandle}
         </div>
@@ -80,6 +106,10 @@ class Profile extends React.Component {
         >
           Logout
         </div>
+        <SocialHandleModal
+          onRef={ref => this.modal = ref}
+          refresh={() => refetch()}
+        />
       </div>
     )
   }
@@ -88,6 +118,7 @@ class Profile extends React.Component {
 const QUERY_USER = gql`
   query getUser($id: String!) {
     user(id: $id) {
+      id
       email
       name
       photoURL
