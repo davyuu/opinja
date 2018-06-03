@@ -1,0 +1,54 @@
+.social-modal {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  border: none;
+  background-color: white;
+}
+
+.social-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.social-modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.social-modal-title {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.social-modal-handle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+  font-size: 1.4em;
+}
+
+.social-modal-input {
+  margin-left: 0.2em;
+  width: 80%;
+  font-size: 1.1em;
+}
+
+.social-modal-submit {
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  border: 2px solid grey;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
