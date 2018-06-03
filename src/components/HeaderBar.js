@@ -2,9 +2,9 @@ import React from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import Dock from 'react-dock'
 import MaterialIcon from 'material-icons-react'
+import images from '../images'
 import routes from '../constants/routes'
 import {getLocalStorageUser, isLoggedIn, logout} from '../utils/functions'
-import logo from '../images/logo.svg'
 import './HeaderBar.css'
 
 class HeaderBar extends React.Component {
@@ -71,7 +71,7 @@ class HeaderBar extends React.Component {
             className='header-button'
             to={routes.home}
           >
-            <img className='header-logo' src={logo} alt='logo' />
+            <div className='header-logo' dangerouslySetInnerHTML={{__html: images.logo}} />
           </Link>
           {profileIcon}
         </div>

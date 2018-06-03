@@ -22,6 +22,7 @@
 .home-search-input {
   border: 0;
   text-align: center;
+  background: none;
 }
 
 .home-search-input::placeholder {
