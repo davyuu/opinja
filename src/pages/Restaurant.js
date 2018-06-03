@@ -10,6 +10,16 @@ import {getLocalStorageRatings} from '../utils/functions'
 import './Restaurant.css'
 
 class Restaurant extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      search: ''
+    };
+  }
+
+  onSearchChange = (event) => {
+    this.setState({search: event.target.value.toLowerCase()})
+  }
 
   getCategoriesMap(items) {
     const categories = {}
@@ -40,8 +50,12 @@ class Restaurant extends React.Component {
       )
     }
 
+    const {search} = this.state
     const {items} = restaurant
-    const categories = this.getCategoriesMap(items)
+    const filteredItems = items.filter((item) => {
+      return item.name.toLowerCase().includes(search)
+    })
+    const categories = this.getCategoriesMap(filteredItems)
 
     const ratings = getLocalStorageRatings();
 
@@ -57,8 +71,17 @@ class Restaurant extends React.Component {
             <div className='restaurant-location'>{restaurant.location}</div>
           </div>
         </div>
-        <div className='restaurant-search'>
-          Search Menu
+        <div className="restaurant-search">
+          <div className="restaurant-search-icon"/>
+          <input
+            className='restaurant-search-input'
+            placeholder='Search for items'
+            onChange={this.onSearchChange}
+          />
+          <MaterialIcon
+            className='restaurant-search-icon'
+            icon='search'
+          />
         </div>
         <div className='restaurant-list'>
           {Object.keys(categories).sort((a, b) => {

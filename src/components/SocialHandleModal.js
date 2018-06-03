@@ -6,7 +6,7 @@ import Modal from 'react-modal'
 import keys from '../constants/keys'
 import './SocialHandleModal.css'
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#app')
 
 class SocialHandleModal extends React.Component {
   constructor(props) {

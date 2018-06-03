@@ -1,7 +1,14 @@
 {
   "name": "ispoll",
   "version": "0.1.0",
-  "private": true,
+  "author": "David Yu",
+  "license": "ISC",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
   "dependencies": {
     "apollo-boost": "^0.1.6",
     "firebase": "^5.0.4",
@@ -18,12 +25,23 @@
     "react-google-login": "^3.2.1",
     "react-modal": "^3.4.4",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4",
     "react-stars": "^2.2.5"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.2.0",
+    "img-loader": "^3.0.0",
+    "style-loader": "^0.21.0",
+    "svg-inline-loader": "^0.8.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.1",
+    "webpack-dev-server": "^3.1.4"
   }
 }

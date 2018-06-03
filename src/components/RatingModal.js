@@ -7,7 +7,7 @@ import ReactStars from 'react-stars'
 import {setLocalStorageRating, getLocalStorageUser} from '../utils/functions'
 import './RatingModal.css'
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#app')
 
 class RatingModal extends React.Component {
   constructor(props) {

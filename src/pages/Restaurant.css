@@ -40,11 +40,28 @@
 }
 
 .restaurant-search {
-  height: 1.5em;
-  padding: 0.5em;
-  opacity: 0.5;
-  font-style: italic;
-  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2em;
+}
+
+.restaurant-search-input {
+  border: 0;
+  text-align: center;
+  background: none;
+}
+
+.restaurant-search-input::placeholder {
+  color: lightgray;
+}
+
+.restaurant-search-input:focus {
+    outline-width: 0;
+}
+
+.restaurant-search-icon {
+  width: 2em;
 }
 
 .restaurant-list {

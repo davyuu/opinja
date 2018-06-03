@@ -6,8 +6,8 @@ import {graphql} from 'react-apollo'
 import {Redirect} from 'react-router-dom'
 import {loginWithFacebook, loginWithGoogle} from '../utils/firebase'
 import {getLocalStorageUser, setLocalStorageUser} from '../utils/functions'
+import images from '../images'
 import routes from '../constants/routes'
-import logo from '../images/logo.svg'
 import './Welcome.css';
 
 class Welcome extends Component {
@@ -90,7 +90,7 @@ class Welcome extends Component {
 
     return (
       <div className='welcome'>
-        <img className='welcome-logo' src={logo} alt='logo' />
+        <div className='welcome-logo' dangerouslySetInnerHTML={{__html: images.logo}} />
         <div className="welcome-signin">
           <div
             className='welcome-signin-button welcome-facebook'
