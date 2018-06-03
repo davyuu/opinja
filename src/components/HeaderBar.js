@@ -23,6 +23,11 @@ class HeaderBar extends React.Component {
     this.setState({isOpen: false});
   }
 
+  logout = () => {
+    logout(this.props.history.push)
+    this.close()
+  }
+
   render() {
     if (!isLoggedIn()) {
       return null
@@ -99,7 +104,7 @@ class HeaderBar extends React.Component {
             </div>
             <div
               className='nav-bar-logout'
-              onClick={() => logout(this.props.history.push)}
+              onClick={this.logout}
             >
               Logout
             </div>
