@@ -5,9 +5,8 @@
   "license": "ISC",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "start": "webpack-dev-server --mode development --env.NODE_ENV=dev --open",
+    "build": "webpack --mode production --env.NODE_ENV=prod"
   },
   "dependencies": {
     "apollo-boost": "^0.1.6",
