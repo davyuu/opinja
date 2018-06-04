@@ -1,14 +1,12 @@
 import React from 'react'
+import TopRestaurants from '../components/TopRestaurants'
 import './Top.css'
 
 class Top extends React.Component {
-  componentDidMount() {
-  }
-
   render() {
     return (
       <div className='top'>
-        Top
+        <TopRestaurants/>
       </div>
     )
   }
