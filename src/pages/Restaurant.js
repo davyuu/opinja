@@ -131,7 +131,7 @@ class Restaurant extends React.Component {
                     <div
                       key={i}
                       className='restaurant-item'
-                      onClick={() => this.modal.openModal(item, userRatingId, userRating)}
+                      onClick={() => this.modal.openModal(userRatingId, restaurant.id, item, userRating)}
                     >
                       <div className='restaurant-item-name'>{item.name}</div>
                       {userRatingView}
