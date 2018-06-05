@@ -15,6 +15,7 @@
     "graphql-tag": "^2.9.2",
     "material-icons-react": "^1.0.0",
     "prop-types": "^15.6.1",
+    "rc-select": "^8.0.9",
     "react": "^16.4.0",
     "react-alert": "^4.0.3",
     "react-apollo": "^2.1.4",

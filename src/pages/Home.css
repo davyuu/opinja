@@ -10,13 +10,19 @@
   font-size: 1.4em;
 }
 
+.home-search-sort {
+  display: flex;
+  flex-direction: row;
+}
+
 .home-search {
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.2em;
   border: 3px solid gray;
-  border-radius: 0.5em;
+  border-radius: 0.3em;
 }
 
 .home-search-input {
@@ -34,7 +40,31 @@
 }
 
 .home-search-icon {
-  width: 2em;
+  width: 24px;
+}
+
+.home-sort {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2em;
+  border: 3px solid gray;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+}
+
+.home-sort-select {
+  width: 100%;
+}
+
+.home-sort-select > div {
+  border: 0;
+  background-color: inherit;
+}
+
+.home-sort-select-dropdown {
+  background-color: inherit;
 }
 
 .home-restaurant {
