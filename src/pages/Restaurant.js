@@ -5,7 +5,8 @@ import ReactStars from 'react-stars'
 import MaterialIcon, {colorPallet} from 'material-icons-react'
 import RatingModal from '../components/RatingModal'
 import keys from '../constants/keys'
-import images from '../images'
+import cuisineImages from '../images/cuisine'
+import categoryImages from '../images/categories'
 import {getLocalStorageRatings} from '../utils/functions'
 import './Restaurant.css'
 
@@ -59,30 +60,9 @@ class Restaurant extends React.Component {
 
     const ratings = getLocalStorageRatings();
 
-    return (
-      <div className='restaurant'>
-        <div className='restaurant-header'>
-          <img
-            src={images.placeholder}
-            alt='placeholder'
-          />
-          <div className='restaurant-header-title'>
-            <div className='restaurant-name'>{restaurant.name}</div>
-            <div className='restaurant-location'>{restaurant.location}</div>
-          </div>
-        </div>
-        <div className="restaurant-search">
-          <div className="restaurant-search-icon"/>
-          <input
-            className='restaurant-search-input'
-            placeholder='Search for items'
-            onChange={this.onSearchChange}
-          />
-          <MaterialIcon
-            className='restaurant-search-icon'
-            icon='search'
-          />
-        </div>
+    let itemsList;
+    if(filteredItems.length > 0) {
+      itemsList = (
         <div className='restaurant-list'>
           {Object.keys(categories).sort((a, b) => {
             return categories[a].order - categories[b].order
@@ -93,7 +73,16 @@ class Restaurant extends React.Component {
                 key={i}
                 className='restaurant-category'
               >
-                <div className='restaurant-category-name'>{category}</div>
+                <div className='restaurant-category-header'>
+                  <img
+                    className='restaurant-category-img'
+                    src={categoryImages[category.toLowerCase()] || categoryImages.placeholder}
+                    alt={category}
+                  />
+                  <div className='restaurant-category-title'>
+                    <div className='restaurant-category-name'>{category}</div>
+                  </div>
+                </div>
                 {items.map((item, i) => {
                   let userRatingView;
                   let userRatingId;
@@ -113,17 +102,29 @@ class Restaurant extends React.Component {
                     )
                   }
                   let overallRatingView;
-                  if(item.overallRating) {
+                  const overallRating = item.overallRating
+                  if(overallRating) {
+                    let ratingColor;
+                    if(overallRating >= 4) {
+                      ratingColor = '#81C784'
+                    } else if(overallRating < 3) {
+                      ratingColor = '#FFEB3B'
+                    } else {
+                      ratingColor = '#f44336'
+                    }
                     overallRatingView = (
                       <div className='restaurant-item-overall-rating-container'>
-                        <div className='restaurant-item-overall-rating'>{item.overallRating}</div>
+                        <div
+                          className='restaurant-item-overall-rating'
+                          style={{background: ratingColor}}
+                        >
+                          {overallRating.toFixed(1)}
+                        </div>
                         <MaterialIcon
                           className='restaurant-item-overall-rating-star'
-                          icon='grade'
-                          color={colorPallet.yellow._500}
-                          size={16}
+                          icon='keyboard_arrow_down'
+                          size={24}
                         />
-                        <div className='restaurant-item-overall-rating-avg'>avg</div>
                       </div>
                     )
                   }
@@ -131,10 +132,9 @@ class Restaurant extends React.Component {
                     <div
                       key={i}
                       className='restaurant-item'
-                      onClick={() => this.modal.openModal(item, userRatingId, userRating)}
+                      onClick={() => this.modal.openModal(userRatingId, restaurant.id, item, userRating)}
                     >
                       <div className='restaurant-item-name'>{item.name}</div>
-                      {userRatingView}
                       {overallRatingView}
                     </div>
                   )
@@ -143,6 +143,41 @@ class Restaurant extends React.Component {
             )
           })}
         </div>
+      )
+    } else {
+      itemsList = (
+        <div className='restaurant-no-items'>
+          No Items Found
+        </div>
+      )
+    }
+
+    return (
+      <div className='restaurant'>
+        <div className='restaurant-header'>
+          <img
+            className='restaurant-img'
+            src={cuisineImages[restaurant.type] || cuisineImages.placeholder}
+            alt={restaurant.type}
+          />
+          <div className='restaurant-title'>
+            <div className='restaurant-name'>{restaurant.name}</div>
+            <div className='restaurant-location'>{restaurant.location}</div>
+          </div>
+        </div>
+        <div className="restaurant-search">
+          <div className="restaurant-search-icon"/>
+          <input
+            className='restaurant-search-input'
+            placeholder='Search Menu'
+            onChange={this.onSearchChange}
+          />
+          <MaterialIcon
+            className='restaurant-search-icon'
+            icon='search'
+          />
+        </div>
+        {itemsList}
         <RatingModal
           onRef={ref => this.modal = ref}
           refresh={() => refetch()}
@@ -158,6 +193,7 @@ const QUERY_RESTAURANTS = gql`
       id
       name
       location
+      type
       items {
         id
         name

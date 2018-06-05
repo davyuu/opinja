@@ -2,41 +2,38 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
 }
 
 .restaurant-header {
   position: relative;
-  text-align: center;
+  height: 4em;
 }
 
-.restaurant-header img {
+.restaurant-img {
   width: 100%;
-  height: 5em;
+  height: 4em;
 }
 
-.restaurant-header-title {
+.restaurant-title {
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   width: 100%;
-  height: 5em;
-  background: rgba(0, 0, 0, 0.5);
+  height: 4em;
 }
 
 .restaurant-name {
   color: white;
   font-size: 1.8em;
-  font-weight: 700;
 }
 
 .restaurant-location {
   color: white;
-  font-size: 1.4em;
+  font-size: 1em;
 }
 
 .restaurant-search {
@@ -65,34 +62,54 @@
 }
 
 .restaurant-list {
-  background: yellow;
+  background: grey;
 }
 
 .restaurant-category {
 }
 
-.restaurant-category-name {
-  margin: 0.5em;
-  padding: 0.5em;
-  background: black;
+.restaurant-category-header {
+  position: relative;
+  height: 2.5em;
+}
+
+.restaurant-category-img {
+  width: 100%;
+  height: 2.5em;
+}
+
+.restaurant-category-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  font-size: 1.2em;
+  width: 100%;
+  height: 2.5em;
+}
+
+.restaurant-category-name {
   color: white;
+  font-size: 1.4em;
 }
 
 .restaurant-item {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  margin: 0.5em;
-  padding: 0.5em;
+  align-items: center;
+  margin: 0.2em;
+  padding: 0.3em;
+  border-radius: 0.3em;
   background: white;
   cursor: pointer;
 }
 
 .restaurant-item-name {
   margin: 0;
-  padding: 0;
+  padding: 0.4em;
   max-width: 16em;
   white-space: nowrap;
   overflow: hidden;
@@ -108,15 +125,17 @@
   flex-direction: row;
   align-items: center;
   margin-top: 2px;
-  /* padding: 3px; */
-  /* border: 1px solid grey; */
-  /* border-radius: 0.5em; */
 }
 
 .restaurant-item-overall-rating {
-  margin: 0;
+  margin: 0 0.4em;
+  padding: 0.3em 0.6em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 1px;
   text-decoration: none;
-  font-size: 12px;
 }
 
 .restaurant-item-overall-rating-star {
@@ -124,8 +143,8 @@
   height: 5px;
 }
 
-.restaurant-item-overall-rating-avg {
-  margin: 0;
-  text-decoration: none;
-  font-size: 10px;
+.restaurant-no-items {
+  margin: 2em;
+  text-align: center;
+  font-size: 2em;
 }

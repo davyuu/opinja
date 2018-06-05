@@ -5,9 +5,8 @@
   "license": "ISC",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "start": "webpack-dev-server --mode development --env.NODE_ENV=dev --open",
+    "build": "webpack --mode production --env.NODE_ENV=prod"
   },
   "dependencies": {
     "apollo-boost": "^0.1.6",
@@ -16,6 +15,7 @@
     "graphql-tag": "^2.9.2",
     "material-icons-react": "^1.0.0",
     "prop-types": "^15.6.1",
+    "rc-select": "^8.0.9",
     "react": "^16.4.0",
     "react-alert": "^4.0.3",
     "react-apollo": "^2.1.4",
@@ -25,7 +25,8 @@
     "react-google-login": "^3.2.1",
     "react-modal": "^3.4.4",
     "react-router-dom": "^4.2.2",
-    "react-stars": "^2.2.5"
+    "react-stars": "^2.2.5",
+    "react-tabs": "^2.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -35,6 +36,7 @@
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "img-loader": "^3.0.0",
     "style-loader": "^0.21.0",

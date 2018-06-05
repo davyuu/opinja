@@ -1,0 +1,31 @@
+.top-restaurants {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.top-restaurant {
+  display: flex;
+  align-items: center;
+  margin: 0.3em;
+  padding: 0.7em;
+  background: gray;
+  color: white;
+  text-decoration: none;
+}
+
+.top-restaurant-rank {
+  width: 3em;
+}
+
+.top-restaurant-descriptions {
+  margin-right: auto;
+}
+
+.top-restaurant-location {
+  font-size: 0.9em;
+}
+
+.top-restaurant-num {
+  width: 6em;
+}

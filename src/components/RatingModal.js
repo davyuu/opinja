@@ -15,8 +15,9 @@ class RatingModal extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      item: null,
       id: null,
+      restaurantId: null,
+      item: null,
       value: null,
     }
 
@@ -34,11 +35,12 @@ class RatingModal extends React.Component {
     this.props.onRef(undefined)
   }
 
-  openModal(item, id, value) {
+  openModal(id, restaurantId, item, value) {
     this.setState({
       modalIsOpen: true,
-      item,
       id,
+      restaurantId,
+      item,
       value
     });
   }
@@ -46,8 +48,9 @@ class RatingModal extends React.Component {
   closeModal() {
     this.setState({
       modalIsOpen: false,
-      item: null,
       id: null,
+      restaurantId: null,
+      item: null,
       value: null
     });
   }
@@ -57,7 +60,7 @@ class RatingModal extends React.Component {
   }
 
   onRatingSubmit() {
-    const {item, id, value} = this.state;
+    const {id, restaurantId, item, value} = this.state;
     if (value === null) {
       alert('Please select an option')
       return
@@ -68,8 +71,9 @@ class RatingModal extends React.Component {
     this.props.mutate({
       variables: {
         id: id,
-        itemId: item.id,
         userId: user.id,
+        restaurantId: restaurantId,
+        itemId: item.id,
         value: value
       },
     }).then(({data}) => {
@@ -125,13 +129,13 @@ RatingModal.propTypes = {
 }
 
 const MUTATION_RATING = gql`
-  mutation addRating($id: String, $itemId: String!, $userId: String, $value: Float!){
-    addRating(id: $id, itemId: $itemId, userId: $userId, value: $value) {
+  mutation addRating($id: String, $userId: String, $restaurantId: String!, $itemId: String!, $value: Float!){
+    addRating(id: $id, userId: $userId, restaurantId: $restaurantId, itemId: $itemId, value: $value) {
       id
-      item {
+      user {
         id
       }
-      user {
+      item {
         id
       }
       value

@@ -1,0 +1,27 @@
+.top-users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.top-user {
+  display: flex;
+  align-items: center;
+  margin: 0.3em;
+  padding: 0.7em;
+  background: gray;
+  color: white;
+  text-decoration: none;
+}
+
+.top-user-rank {
+  width: 3em;
+}
+
+.top-user-name {
+  margin-right: auto;
+}
+
+.top-user-points {
+  width: 6em;
+}

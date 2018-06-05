@@ -1,6 +1,5 @@
 const images = {
-  logo: require('./logo.svg'),
-  placeholder: require('./placeholder.png'),
+  logo: require('./logo.svg')
 };
 
 export default images;
