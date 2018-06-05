@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import MaterialIcon from 'material-icons-react'
 import Select, {Option} from 'rc-select'
 import {getLocalStorageUser} from '../utils/functions'
+import cuisineImages from '../images/cuisine'
 import routes from '../constants/routes'
 import './Home.css'
 import 'rc-select/assets/index.css';
@@ -103,8 +104,15 @@ class Home extends React.Component {
                 className='home-restaurant'
                 to={`${routes.restaurant}/${restaurant.id}`}
               >
-                <div className='home-restaurant-name'>{restaurant.name}</div>
-                <div className='home-restaurant-location'>{restaurant.location}</div>
+                <img
+                  className='home-restaurant-img'
+                  src={cuisineImages[restaurant.type.toLowerCase()]}
+                  alt={restaurant.type}
+                />
+                <div className='home-restaurant-title'>
+                  <div className='home-restaurant-name'>{restaurant.name}</div>
+                  <div className='home-restaurant-location'>{restaurant.location}</div>
+                </div>
               </Link>
             )
           })}
@@ -119,6 +127,7 @@ const query = gql`{
     id
     name
     location
+    type
   }
 }`
 

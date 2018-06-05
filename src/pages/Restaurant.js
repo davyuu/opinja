@@ -60,31 +60,9 @@ class Restaurant extends React.Component {
 
     const ratings = getLocalStorageRatings();
 
-    return (
-      <div className='restaurant'>
-        <div className='restaurant-header'>
-          <img
-            className='restaurant-img'
-            src={cuisineImages[restaurant.type]}
-            alt={restaurant.type}
-          />
-          <div className='restaurant-title'>
-            <div className='restaurant-name'>{restaurant.name}</div>
-            <div className='restaurant-location'>{restaurant.location}</div>
-          </div>
-        </div>
-        <div className="restaurant-search">
-          <div className="restaurant-search-icon"/>
-          <input
-            className='restaurant-search-input'
-            placeholder='Search for items'
-            onChange={this.onSearchChange}
-          />
-          <MaterialIcon
-            className='restaurant-search-icon'
-            icon='search'
-          />
-        </div>
+    let itemsList;
+    if(filteredItems.length > 0) {
+      itemsList = (
         <div className='restaurant-list'>
           {Object.keys(categories).sort((a, b) => {
             return categories[a].order - categories[b].order
@@ -124,17 +102,29 @@ class Restaurant extends React.Component {
                     )
                   }
                   let overallRatingView;
-                  if(item.overallRating) {
+                  const overallRating = item.overallRating
+                  if(overallRating) {
+                    let ratingColor;
+                    if(overallRating >= 4) {
+                      ratingColor = '#81C784'
+                    } else if(overallRating < 3) {
+                      ratingColor = '#FFEB3B'
+                    } else {
+                      ratingColor = '#f44336'
+                    }
                     overallRatingView = (
                       <div className='restaurant-item-overall-rating-container'>
-                        <div className='restaurant-item-overall-rating'>{item.overallRating}</div>
+                        <div
+                          className='restaurant-item-overall-rating'
+                          style={{background: ratingColor}}
+                        >
+                          {overallRating.toFixed(1)}
+                        </div>
                         <MaterialIcon
                           className='restaurant-item-overall-rating-star'
-                          icon='grade'
-                          color={colorPallet.yellow._500}
-                          size={16}
+                          icon='keyboard_arrow_down'
+                          size={24}
                         />
-                        <div className='restaurant-item-overall-rating-avg'>avg</div>
                       </div>
                     )
                   }
@@ -145,7 +135,6 @@ class Restaurant extends React.Component {
                       onClick={() => this.modal.openModal(userRatingId, restaurant.id, item, userRating)}
                     >
                       <div className='restaurant-item-name'>{item.name}</div>
-                      {userRatingView}
                       {overallRatingView}
                     </div>
                   )
@@ -154,6 +143,41 @@ class Restaurant extends React.Component {
             )
           })}
         </div>
+      )
+    } else {
+      itemsList = (
+        <div className='restaurant-no-items'>
+          No Items Found
+        </div>
+      )
+    }
+
+    return (
+      <div className='restaurant'>
+        <div className='restaurant-header'>
+          <img
+            className='restaurant-img'
+            src={cuisineImages[restaurant.type]}
+            alt={restaurant.type}
+          />
+          <div className='restaurant-title'>
+            <div className='restaurant-name'>{restaurant.name}</div>
+            <div className='restaurant-location'>{restaurant.location}</div>
+          </div>
+        </div>
+        <div className="restaurant-search">
+          <div className="restaurant-search-icon"/>
+          <input
+            className='restaurant-search-input'
+            placeholder='Search for items'
+            onChange={this.onSearchChange}
+          />
+          <MaterialIcon
+            className='restaurant-search-icon'
+            icon='search'
+          />
+        </div>
+        {itemsList}
         <RatingModal
           onRef={ref => this.modal = ref}
           refresh={() => refetch()}
