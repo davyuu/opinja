@@ -1,2 +1,25 @@
 .top {
 }
+
+.top-tab-list {
+  border-bottom: 1px solid #aaa;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.top-tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.top-tab-selected {
+  background: #f6f6f6;
+  border-color: #aaa;
+  border-radius: 5px 5px 0 0;
+}

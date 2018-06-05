@@ -129,7 +129,6 @@ RatingModal.propTypes = {
 }
 
 const MUTATION_RATING = gql`
-
   mutation addRating($id: String, $userId: String, $restaurantId: String!, $itemId: String!, $value: Float!){
     addRating(id: $id, userId: $userId, restaurantId: $restaurantId, itemId: $itemId, value: $value) {
       id

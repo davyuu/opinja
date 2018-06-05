@@ -1,10 +1,10 @@
-.top-restaurants {
+.top-users {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.top-restaurant {
+.top-user {
   display: flex;
   align-items: center;
   margin: 0.3em;
@@ -14,18 +14,14 @@
   text-decoration: none;
 }
 
-.top-restaurant-rank {
+.top-user-rank {
   width: 3em;
 }
 
-.top-restaurant-descriptions {
+.top-user-name {
   margin-right: auto;
 }
 
-.top-restaurant-location {
-  font-size: 0.9em;
-}
-
-.top-restaurant-num {
+.top-user-points {
   width: 6em;
 }
