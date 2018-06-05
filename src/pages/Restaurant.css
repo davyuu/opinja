@@ -6,12 +6,12 @@
 
 .restaurant-header {
   position: relative;
-  text-align: center;
+  height: 4em;
 }
 
 .restaurant-img {
   width: 100%;
-  height: 5em;
+  height: 4em;
 }
 
 .restaurant-title {
@@ -21,21 +21,19 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   width: 100%;
-  height: 5em;
-  background: rgba(0, 0, 0, 0.5);
+  height: 4em;
 }
 
 .restaurant-name {
   color: white;
   font-size: 1.8em;
-  font-weight: 700;
 }
 
 .restaurant-location {
   color: white;
-  font-size: 1.4em;
+  font-size: 1em;
 }
 
 .restaurant-search {
@@ -72,6 +70,7 @@
 
 .restaurant-category-header {
   position: relative;
+  height: 2.5em;
 }
 
 .restaurant-category-img {
@@ -89,7 +88,6 @@
   text-align: center;
   width: 100%;
   height: 2.5em;
-  background: rgba(0, 0, 0, 0.5);
 }
 
 .restaurant-category-name {

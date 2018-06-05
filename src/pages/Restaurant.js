@@ -76,7 +76,7 @@ class Restaurant extends React.Component {
                 <div className='restaurant-category-header'>
                   <img
                     className='restaurant-category-img'
-                    src={categoryImages[category.toLowerCase()]}
+                    src={categoryImages[category.toLowerCase()] || categoryImages.placeholder}
                     alt={category}
                   />
                   <div className='restaurant-category-title'>
@@ -157,7 +157,7 @@ class Restaurant extends React.Component {
         <div className='restaurant-header'>
           <img
             className='restaurant-img'
-            src={cuisineImages[restaurant.type]}
+            src={cuisineImages[restaurant.type] || cuisineImages.placeholder}
             alt={restaurant.type}
           />
           <div className='restaurant-title'>
@@ -169,7 +169,7 @@ class Restaurant extends React.Component {
           <div className="restaurant-search-icon"/>
           <input
             className='restaurant-search-input'
-            placeholder='Search for items'
+            placeholder='Search Menu'
             onChange={this.onSearchChange}
           />
           <MaterialIcon

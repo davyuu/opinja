@@ -25,16 +25,8 @@ module.exports = env => {
     module: {
       rules: [
         {
-          test: /\.png$/,
-          use: [
-            {
-              loader: 'url-loader',
-              options: {
-                limit: 100000,
-                mimetype: 'image/png'
-              }
-            }
-          ]
+          test: /\.(png|jpg)$/,
+          loader: 'file-loader'
         },
         {
           test: /\.svg$/,

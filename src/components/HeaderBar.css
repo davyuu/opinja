@@ -11,22 +11,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4em;
-  height: 4em;
+  width: 3.5em;
+  height: 3.5em;
   text-decoration: none;
   cursor: pointer;
 }
 
 .header-logo {
-  width: 4em;
+  width: 3.5em;
 }
 
 .header-profile {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4em;
-  height: 4em;
+  width: 3.5em;
+  height: 3.5em;
   text-decoration: none;
 }
 
