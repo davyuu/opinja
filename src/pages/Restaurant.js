@@ -5,7 +5,8 @@ import ReactStars from 'react-stars'
 import MaterialIcon, {colorPallet} from 'material-icons-react'
 import RatingModal from '../components/RatingModal'
 import keys from '../constants/keys'
-import images from '../images'
+import cuisineImages from '../images/cuisine'
+import categoryImages from '../images/categories'
 import {getLocalStorageRatings} from '../utils/functions'
 import './Restaurant.css'
 
@@ -63,10 +64,11 @@ class Restaurant extends React.Component {
       <div className='restaurant'>
         <div className='restaurant-header'>
           <img
-            src={images.placeholder}
-            alt='placeholder'
+            className='restaurant-img'
+            src={cuisineImages[restaurant.type]}
+            alt={restaurant.type}
           />
-          <div className='restaurant-header-title'>
+          <div className='restaurant-title'>
             <div className='restaurant-name'>{restaurant.name}</div>
             <div className='restaurant-location'>{restaurant.location}</div>
           </div>
@@ -93,7 +95,16 @@ class Restaurant extends React.Component {
                 key={i}
                 className='restaurant-category'
               >
-                <div className='restaurant-category-name'>{category}</div>
+                <div className='restaurant-category-header'>
+                  <img
+                    className='restaurant-category-img'
+                    src={categoryImages[category.toLowerCase()]}
+                    alt={category}
+                  />
+                  <div className='restaurant-category-title'>
+                    <div className='restaurant-category-name'>{category}</div>
+                  </div>
+                </div>
                 {items.map((item, i) => {
                   let userRatingView;
                   let userRatingId;
@@ -158,6 +169,7 @@ const QUERY_RESTAURANTS = gql`
       id
       name
       location
+      type
       items {
         id
         name

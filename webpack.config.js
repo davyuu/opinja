@@ -53,7 +53,7 @@ module.exports = env => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        favicon: './src/images/favicon.ico',
+        favicon: './src/images/icons/favicon.ico',
         template: './src/index.html'
       }),
       new webpack.DefinePlugin({

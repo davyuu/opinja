@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
 }
 
 .restaurant-header {
@@ -10,12 +9,12 @@
   text-align: center;
 }
 
-.restaurant-header img {
+.restaurant-img {
   width: 100%;
   height: 5em;
 }
 
-.restaurant-header-title {
+.restaurant-title {
   position: absolute;
   top: 0;
   left: 0;
@@ -65,26 +64,45 @@
 }
 
 .restaurant-list {
-  background: yellow;
+  background: grey;
 }
 
 .restaurant-category {
 }
 
-.restaurant-category-name {
-  margin: 0.5em;
-  padding: 0.5em;
-  background: black;
+.restaurant-category-header {
+  position: relative;
   text-align: center;
-  font-size: 1.2em;
+}
+
+.restaurant-category-img {
+  width: 100%;
+  height: 3em;
+}
+
+.restaurant-category-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 3em;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.restaurant-category-name {
   color: white;
+  font-size: 1.4em;
 }
 
 .restaurant-item {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  margin: 0.5em;
+  margin: 0.2em;
   padding: 0.5em;
   background: white;
   cursor: pointer;
