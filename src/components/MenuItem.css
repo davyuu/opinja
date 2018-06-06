@@ -1,0 +1,53 @@
+.menu-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-description {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.2em;
+  padding: 0.3em;
+  border-radius: 0.3em;
+  background: white;
+  cursor: pointer;
+}
+
+.menu-item-name {
+  margin: 0;
+  padding: 0.4em;
+  max-width: 16em;
+  font-size: 0.95em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-item-user-rating span {
+  margin: 0 2px;
+}
+
+.menu-item-overall-rating-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.menu-item-overall-rating {
+  margin: 0 0.4em;
+  padding: 0.3em 0.6em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.menu-item-arrow {
+  width: 5px;
+  height: 5px;
+}

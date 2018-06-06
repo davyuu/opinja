@@ -5,18 +5,25 @@ import {graphql} from 'react-apollo'
 import MaterialIcon from 'material-icons-react'
 import SocialHandleModal from '../components/SocialHandleModal'
 import keys from '../constants/keys'
+import routes from '../constants/routes'
 import {logout} from '../utils/functions'
 import './Profile.css'
 
 class Profile extends React.Component {
+
+  componentDidMount() {
+    console.log('componentDidMount')
+    if(!props.location.state.id) {
+      this.props.history.push(routes.home)
+    }
+  }
+
   render() {
     const {loading, user, refetch} = this.props.data
     if(loading) return <div>Loading...</div>
 
     if(!user) {
-      return (
-        <div>No User Found</div>
-      )
+      logout(this.props.history.push)
     }
 
     let profilePic;
