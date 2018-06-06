@@ -3,7 +3,6 @@ import routes from '../constants/routes'
 
 export const getLocalStorageRatings = () => {
   const ratings = JSON.parse(localStorage.getItem(keys.LOCAL_STORAGE_RATINGS_KEY))
-  console.log('ratings', ratings)
   if(ratings) {
     return ratings
   } else {
@@ -44,6 +43,5 @@ export const logout = (push) => {
 }
 
 export const clearLocalStorage = () => {
-  console.log('clearLocalStorage')
   localStorage.clear();
 }

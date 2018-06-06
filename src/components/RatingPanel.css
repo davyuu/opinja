@@ -1,0 +1,42 @@
+.rating-panel {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.rating-panel-container {
+  display: flex;
+  align-items: center;
+  margin: 0.2em;
+  padding: 0.3em;
+  border-radius: 0.3em;
+  background: white;
+}
+
+.rating-panel-label {
+  margin: 0 0.5em;
+  color: gray;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.rating-panel-stars {
+  margin: 0 0.5em;
+}
+
+.rating-panel-stars span {
+  margin: 0 0.2em;
+}
+
+.rating-panel-submit {
+  margin: 0 0.4em;
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: white;
+  background: #9E9E9E;
+  letter-spacing: 1px;
+  text-decoration: none;
+  cursor: pointer;
+}

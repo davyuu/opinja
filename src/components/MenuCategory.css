@@ -1,0 +1,29 @@
+.menu-category {
+}
+
+.menu-category-header {
+  position: relative;
+  height: 2.5em;
+}
+
+.menu-category-img {
+  width: 100%;
+  height: 2.5em;
+}
+
+.menu-category-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 2.5em;
+}
+
+.menu-category-name {
+  color: white;
+  font-size: 1.4em;
+}

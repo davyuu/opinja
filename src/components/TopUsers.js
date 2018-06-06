@@ -1,8 +1,8 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
-// import {Link} from 'react-router-dom'
-// import routes from '../constants/routes'
+import {Link} from 'react-router-dom'
+import routes from '../constants/routes'
 import './TopUsers.css'
 
 class TopUsers extends React.Component {
@@ -23,14 +23,15 @@ class TopUsers extends React.Component {
         {users.sort((a, b) => a.points < b.points)
           .map((user, i) => {
             return (
-              <div
+              <Link
                 key={i}
                 className='top-user'
+                to={`${routes.profile}/${user.id}`}
               >
                 <div className="top-user-rank">{i+1}</div>
                 <div className="top-user-name">{user.name}</div>
                 <div className="top-user-points">{user.points} points</div>
-              </div>
+              </Link>
             )
           })
         }
