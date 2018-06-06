@@ -30,7 +30,7 @@ export default class App extends Component {
             <Route exact path={routes.welcome} component={Pages.Welcome}/>
             <PrivateRoute path={routes.home} component={Pages.Home}/>
             <PrivateRoute path={`${routes.restaurant}/:id`} component={Pages.Restaurant}/>
-            <PrivateRoute path={routes.profile} component={Pages.Profile}/>
+            <PrivateRoute path={`${routes.profile}/:id`} component={Pages.Profile}/>
             <PrivateRoute path={routes.top} component={Pages.Top}/>
           </div>
         </Router>

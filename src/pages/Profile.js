@@ -6,24 +6,27 @@ import MaterialIcon from 'material-icons-react'
 import SocialHandleModal from '../components/SocialHandleModal'
 import keys from '../constants/keys'
 import routes from '../constants/routes'
-import {logout} from '../utils/functions'
+import {getLocalStorageUser, logout} from '../utils/functions'
 import './Profile.css'
 
 class Profile extends React.Component {
-
-  componentDidMount() {
-    console.log('componentDidMount')
-    if(!props.location.state.id) {
-      this.props.history.push(routes.home)
-    }
-  }
 
   render() {
     const {loading, user, refetch} = this.props.data
     if(loading) return <div>Loading...</div>
 
     if(!user) {
-      logout(this.props.history.push)
+      return (
+        <div>No User Found</div>
+      )
+    }
+
+    const isCachedUser = getLocalStorageUser().id === user.id
+
+    const openModal = () => {
+      if(isCachedUser){
+        this.modal.openModal(user.id, keys.INSTAGRAM, user.instagramHandle)
+      }
     }
 
     let profilePic;
@@ -53,13 +56,19 @@ class Profile extends React.Component {
           @{user.twitterHandle}
         </div>
       )
-    } else {
+    } else if(isCachedUser) {
       twitterHandle = (
         <div className='profile-set-value'>
           set twitter handle
         </div>
       )
-    }
+    } else (
+      twitterHandle = (
+        <div className='profile-set-value'>
+          not set
+        </div>
+      )
+    )
 
     let instagramHandle;
     if(user.instagramHandle) {
@@ -68,10 +77,28 @@ class Profile extends React.Component {
           @{user.instagramHandle}
         </div>
       )
-    } else {
+    } else if(isCachedUser) {
       instagramHandle = (
         <div className='profile-set-value'>
           set instagram handle
+        </div>
+      )
+    } else (
+      instagramHandle = (
+        <div className='profile-set-value'>
+          not set
+        </div>
+      )
+    )
+
+    let logoutView;
+    if(isCachedUser) {
+      logoutView = (
+        <div
+          className='profile-logout'
+          onClick={() => logout(this.props.history.push)}
+        >
+          Logout
         </div>
       )
     }
@@ -93,7 +120,7 @@ class Profile extends React.Component {
         <div className='profile-divider'/>
         <div
           className='profile-social'
-          onClick={() => this.modal.openModal(user.id, keys.TWITTER, user.twitterHandle)}
+          onClick={this.openModal}
         >
           <div className='profile-label profile-font'>Twitter:</div>
           {twitterHandle}
@@ -101,18 +128,13 @@ class Profile extends React.Component {
         <div className='profile-divider'/>
         <div
           className='profile-social'
-          onClick={() => this.modal.openModal(user.id, keys.INSTAGRAM, user.instagramHandle)}
+          onClick={this.openModal}
         >
           <div className='profile-label profile-font'>Instagram:</div>
           {instagramHandle}
         </div>
         <div className='profile-divider'/>
-        <div
-          className='profile-logout'
-          onClick={() => logout(this.props.history.push)}
-        >
-          Logout
-        </div>
+        {logoutView}
         <SocialHandleModal
           onRef={ref => this.modal = ref}
           refresh={() => refetch()}
@@ -139,7 +161,7 @@ const QUERY_USER = gql`
 const OPTIONS_USER = {
   options: props => ({
     variables: {
-      id: props.location.state.id
+      id: props.match.params.id
     }
   })
 }

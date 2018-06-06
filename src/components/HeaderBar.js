@@ -41,10 +41,7 @@ class HeaderBar extends React.Component {
       profileIcon = (
         <Link
           className='header-button'
-          to={{
-            pathname: routes.profile,
-            state: {id: user.id}
-          }}
+          to={`${routes.profile}/${user.id}`}
         >
           <MaterialIcon
             icon='account_circle'
