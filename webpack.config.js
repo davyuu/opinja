@@ -26,7 +26,7 @@ module.exports = env => {
       rules: [
         {
           test: /\.(png|jpg)$/,
-          loader: 'file-loader'
+          loader: 'url-loader'
         },
         {
           test: /\.svg$/,
