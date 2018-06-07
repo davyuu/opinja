@@ -38,7 +38,7 @@ class SocialHandleModal extends React.Component {
       modalIsOpen: true,
       id,
       handleType,
-      handle
+      handle: handle || ''
     });
   }
 

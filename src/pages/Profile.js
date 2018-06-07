@@ -23,9 +23,13 @@ class Profile extends React.Component {
 
     const isCachedUser = getLocalStorageUser().id === user.id
 
-    const openModal = () => {
+    const openModal = (key) => {
       if(isCachedUser){
-        this.modal.openModal(user.id, keys.INSTAGRAM, user.instagramHandle)
+        if(key === keys.INSTAGRAM) {
+          this.modal.openModal(user.id, keys.INSTAGRAM, user.instagramHandle)
+        } else if (key === keys.TWITTER) {
+          this.modal.openModal(user.id, keys.TWITTER, user.twitterHandle)
+        }
       }
     }
 
@@ -109,9 +113,9 @@ class Profile extends React.Component {
           {profilePic}
           <div className='profile-font profile-name'>{user.name}</div>
         </div>
-        <div className='profile-type profile-font'>
+        {/* <div className='profile-type profile-font'>
           <span className='profile-type-value'>Silver</span> User
-        </div>
+        </div> */}
         <div className='profile-divider'/>
         <div className='profile-points'>
           <div className='profile-points-label profile-font'>Points</div>
@@ -120,7 +124,7 @@ class Profile extends React.Component {
         <div className='profile-divider'/>
         <div
           className='profile-social'
-          onClick={this.openModal}
+          onClick={() => openModal(keys.TWITTER)}
         >
           <div className='profile-label profile-font'>Twitter:</div>
           {twitterHandle}
@@ -128,7 +132,7 @@ class Profile extends React.Component {
         <div className='profile-divider'/>
         <div
           className='profile-social'
-          onClick={this.openModal}
+          onClick={() => openModal(keys.INSTAGRAM)}
         >
           <div className='profile-label profile-font'>Instagram:</div>
           {instagramHandle}
