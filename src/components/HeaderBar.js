@@ -73,7 +73,10 @@ class HeaderBar extends React.Component {
             className='header-button'
             to={routes.home}
           >
-            <div className='header-logo' dangerouslySetInnerHTML={{__html: images.logo}} />
+            <img
+              className='header-logo'
+              src={images.logo}
+            />
           </Link>
           {profileIcon}
         </div>

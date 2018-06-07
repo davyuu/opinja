@@ -33,18 +33,11 @@ class MenuItem extends React.Component {
         ratingColor = '#f44336'
       }
       overallRatingView = (
-        <div className='menu-item-overall-rating-container'>
-          <div
-            className='menu-item-overall-rating'
-            style={{background: ratingColor}}
-          >
-            {overallRating.toFixed(1)}
-          </div>
-          <MaterialIcon
-            className='menu-item-arrow'
-            icon={isOpened ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-            size={24}
-          />
+        <div
+          className='menu-item-rating'
+          style={{background: ratingColor}}
+        >
+          {overallRating.toFixed(1)}
         </div>
       )
     }
@@ -56,8 +49,15 @@ class MenuItem extends React.Component {
           onClick={this.toggleIsOpened}
         >
           <div className='menu-item-name'>{item.name}</div>
-          {overallRatingView}
-        </div>
+          <div className='menu-item-rating-container'>
+            {overallRatingView}
+            <MaterialIcon
+              className='menu-item-arrow'
+              icon={isOpened ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+              size={24}
+            />
+          </div>
+          </div>
         <Collapse isOpened={isOpened}>
           <RatingPanel
             restaurantId={restaurantId}

@@ -37,15 +37,23 @@
   font-size: 1em;
 }
 
+.restaurant-search-background {
+  background: grey;
+}
+
 .restaurant-search {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.2em;
+  margin: 0.2em;
+  padding: 0.3em;
+  border-radius: 0.3em;
+  background: white;
 }
 
 .restaurant-search-input {
   border: 0;
+  font-size: 0.9em;
   text-align: center;
   background: none;
 }
