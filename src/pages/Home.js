@@ -37,6 +37,11 @@ class Home extends React.Component {
     this.setState({search: event.target.value.toLowerCase()})
   }
 
+  clearSearch = () => {
+    this.search.value = ''
+    this.setState({search: ''})
+  }
+
   onSortChange = (event) => {
     let value;
     if (event && event.target) {
@@ -79,11 +84,14 @@ class Home extends React.Component {
               className='home-search-input'
               placeholder='Search for restaurant'
               onChange={this.onSearchChange}
+              ref={(ref) => this.search = ref}
             />
-            <MaterialIcon
-              className='home-search-icon'
-              icon='search'
-            />
+            <div onClick={this.clearSearch}>
+              <MaterialIcon
+                className='home-search-icon'
+                icon={search ? 'cancel' : 'search'}
+              />
+            </div>
           </div>
           <div className='home-sort'>
             <Select

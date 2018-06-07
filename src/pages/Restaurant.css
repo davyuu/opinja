@@ -37,6 +37,10 @@
   font-size: 1em;
 }
 
+.restaurant-search-background {
+  background: grey;
+}
+
 .restaurant-search {
   display: flex;
   justify-content: center;

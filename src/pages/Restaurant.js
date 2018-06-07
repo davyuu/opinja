@@ -18,6 +18,11 @@ class Restaurant extends React.Component {
     this.setState({search: event.target.value.toLowerCase()})
   }
 
+  clearSearch = () => {
+    this.search.value = ''
+    this.setState({search: ''})
+  }
+
   getCategoriesMap(items) {
     const categories = {}
     items.filter((item) => {
@@ -91,17 +96,22 @@ class Restaurant extends React.Component {
             <div className='restaurant-location'>{restaurant.location}</div>
           </div>
         </div>
-        <div className="restaurant-search">
-          <div className="restaurant-search-icon"/>
-          <input
-            className='restaurant-search-input'
-            placeholder='Search Menu'
-            onChange={this.onSearchChange}
-          />
-          <MaterialIcon
-            className='restaurant-search-icon'
-            icon='search'
-          />
+        <div className='restaurant-search-background'>
+          <div className="restaurant-search">
+            <div className="restaurant-search-icon"/>
+            <input
+              className='restaurant-search-input'
+              placeholder='Search Menu'
+              onChange={this.onSearchChange}
+              ref={(ref) => this.search = ref}
+            />
+            <div onClick={this.clearSearch}>
+              <MaterialIcon
+                className='restaurant-search-icon'
+                icon={this.state.search ? 'cancel' : 'search'}
+              />
+            </div>
+          </div>
         </div>
         {categoriesList}
       </div>
