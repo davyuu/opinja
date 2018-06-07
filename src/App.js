@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from 'react-apollo'
-import {HashRouter as Router, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import HeaderBar from './components/HeaderBar'
 import Pages from './pages'
 import routes from './constants/routes'
@@ -11,7 +11,7 @@ import './App.css';
 const env = process.env.NODE_ENV
 let BASE_URL
 if(env === 'prod') {
-  BASE_URL = `https://ispoll-server.herokuapp.com`
+  BASE_URL = `https://opinja-server.herokuapp.com`
 } else if(env === 'dev') {
   BASE_URL = `http://localhost:4000`
 }

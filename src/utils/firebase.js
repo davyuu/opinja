@@ -2,12 +2,10 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 const config = {
-  apiKey: "AIzaSyDN4QoGrB3RUpUYqU-vOmk3cbrouINGiRs",
-  authDomain: "ispoll-204321.firebaseapp.com",
-  databaseURL: "https://ispoll-204321.firebaseio.com",
-  projectId: "ispoll-204321",
-  storageBucket: "ispoll-204321.appspot.com",
-  messagingSenderId: "563048300519"
+  apiKey: "AIzaSyCx2CMp37E-a5wpRrv7UI6MIEyMCITpGFk",
+  authDomain: "opinja-68fb1.firebaseapp.com",
+  databaseURL: "https://opinja-68fb1.firebaseio.com/",
+  storageBucket: "opinja-68fb1.appspot.com",
 };
 
 firebase.initializeApp(config)
