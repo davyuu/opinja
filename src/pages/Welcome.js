@@ -90,7 +90,10 @@ class Welcome extends Component {
 
     return (
       <div className='welcome'>
-        <div className='welcome-logo' dangerouslySetInnerHTML={{__html: images.logo}} />
+        <img
+          className='welcome-logo'
+          src={images.logo}
+        />
         <div className="welcome-signin">
           <div
             className='welcome-signin-button welcome-facebook'

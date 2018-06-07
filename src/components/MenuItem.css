@@ -29,14 +29,14 @@
   margin: 0 2px;
 }
 
-.menu-item-overall-rating-container {
+.menu-item-rating-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 2px;
 }
 
-.menu-item-overall-rating {
+.menu-item-rating {
   margin: 0 0.4em;
   padding: 0.3em 0.6em;
   border-radius: 0.3em;
