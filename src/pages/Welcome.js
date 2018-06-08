@@ -6,7 +6,7 @@ import {graphql} from 'react-apollo'
 import {Redirect} from 'react-router-dom'
 import {loginWithFacebook, loginWithGoogle} from '../utils/firebase'
 import {getLocalStorageUser, setLocalStorageUser} from '../utils/functions'
-import images from '../images'
+import images from '../images/logos'
 import routes from '../constants/routes'
 import './Welcome.css';
 
