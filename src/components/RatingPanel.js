@@ -8,21 +8,19 @@ import {getLocalStorageRatings, setLocalStorageRating, getLocalStorageUser} from
 import './RatingPanel.css'
 
 class RatingPanel extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    id: null,
+    value: null
+  }
 
-    const {item} = props
+  componentWillReceiveProps() {
+    const {item} = this.props
     const ratings = getLocalStorageRatings()
-    let id;
-    let value;
     if(ratings[item.id]) {
-      id = ratings[item.id][keys.RATING_ID_KEY]
-      value = ratings[item.id][keys.RATING_VALUE_KEY]
-    }
-
-    this.state = {
-      id,
-      value
+      this.setState({
+        id: ratings[item.id][keys.RATING_ID_KEY],
+        value: ratings[item.id][keys.RATING_VALUE_KEY]
+      })
     }
   }
 
@@ -57,7 +55,6 @@ class RatingPanel extends React.Component {
   }
 
   render() {
-    const {value} = this.state;
     return (
       <div className='rating-panel'>
         <div className="rating-panel-container">
@@ -67,7 +64,7 @@ class RatingPanel extends React.Component {
           <div className='rating-panel-stars'>
             <ReactStars
               count={5}
-              value={value}
+              value={this.state.value}
               onChange={this.onRatingChange}
               size={22}
             />

@@ -28,9 +28,9 @@ class MenuItem extends React.Component {
       if(overallRating >= 4) {
         ratingColor = '#81C784'
       } else if(overallRating < 3) {
-        ratingColor = '#FFEB3B'
+        ratingColor = '#F44336'
       } else {
-        ratingColor = '#f44336'
+        ratingColor = '#FFEB3B'
       }
       overallRatingView = (
         <div
