@@ -166,7 +166,8 @@ const OPTIONS_USER = {
   options: props => ({
     variables: {
       id: props.match.params.id
-    }
+    },
+    fetchPolicy: 'network-only'
   })
 }
 
