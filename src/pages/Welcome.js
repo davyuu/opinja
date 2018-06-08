@@ -26,7 +26,7 @@ class Welcome extends Component {
       const user = {
         email: res.user.email,
         name: res.user.displayName,
-        photoURL: res.additionalUserInfo.profile.picture.data.url,
+        photoURL: `${res.user.photoURL}?type=large`,
         providerId: res.credential.providerId,
         token: res.credential.accessToken
       }
