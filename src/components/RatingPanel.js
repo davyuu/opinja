@@ -32,7 +32,7 @@ class RatingPanel extends React.Component {
     const {id, value} = this.state;
     const {restaurantId, item, refetch} = this.props;
     if (value === null) {
-      alert('Please select an option')
+      alert('Please select a rating')
       return
     }
 
