@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import MenuItem from './MenuItem'
+import categories from '../constants/categories'
 import categoryImages from '../images/categories'
 import './MenuCategory.css'
 
@@ -17,7 +18,7 @@ class MenuCategory extends React.Component {
             alt={category}
           />
           <div className='menu-category-title'>
-            <div className='menu-category-name'>{category}</div>
+            <div className='menu-category-name'>{categories[category]}</div>
           </div>
         </div>
         {items.map((item, i) => {

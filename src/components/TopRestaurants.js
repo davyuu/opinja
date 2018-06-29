@@ -20,7 +20,19 @@ class TopRestaurants extends React.Component {
 
     return (
       <div className='top-restaurants'>
-        {restaurants.sort((a, b) => a.numRatings < b.numRatings)
+        {restaurants.sort((a, b) => {
+          const aNum = a.numRatings
+          const bNum = b.numRatings
+          if(aNum < bNum) {
+            return 1
+          } else if(aNum > bNum) {
+            return -1
+          } else {
+            const aName = a.name.toLowerCase()
+            const bName = b.name.toLowerCase()
+            return aName > bName ? 1 : aName < bName ? -1 : 0
+          }
+        })
           .map((restaurant, i) => {
             return (
               <Link
@@ -31,7 +43,7 @@ class TopRestaurants extends React.Component {
                 <div className="top-restaurant-rank">{i+1}</div>
                 <div className='top-restaurant-descriptions'>
                   <div className="top-restaurant-name">{restaurant.name}</div>
-                  <div className="top-restaurant-location">{restaurant.location}</div>
+                  <div className="top-restaurant-address">{restaurant.address}</div>
                 </div>
                 <div className="top-restaurant-num">{restaurant.numRatings} ratings</div>
               </Link>
@@ -47,7 +59,7 @@ const QUERY_RESTAURANTS = gql`{
   restaurants {
     id
     name
-    location
+    address
     numRatings
   }
 }`

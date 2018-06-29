@@ -86,13 +86,37 @@
   top: 0;
   left: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 4em;
 }
 
+.home-restaurant-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.home-restaurant-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12px;
+  width: 12px;
+  margin: 2px;
+}
+
+.home-restaurant-chevron {
+}
+
 .home-restaurant-name {
-  font-size: 1.5em;
+  width: 100%;
+  font-size: 1.4em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

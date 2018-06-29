@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import MaterialIcon from 'material-icons-react'
 import MenuCategory from '../components/MenuCategory'
+import categories from '../constants/categories'
 import cuisineImages from '../images/cuisine'
 import './Restaurant.css'
 
@@ -23,25 +24,18 @@ class Restaurant extends React.Component {
     this.setState({search: ''})
   }
 
-  getCategoriesMap(items) {
-    const categories = {}
+  getCategoryMap(items) {
+    const categoryMap = {}
+    Object.keys(categories).forEach(category => {
+      categoryMap[category] = []
+    })
     items.filter((item) => {
       return item.name.toLowerCase().includes(this.state.search)
     }).forEach(item => {
-      const category = item.category.name;
-      if(!categories[category]) {
-        categories[category] = {
-          order: item.category.order,
-          items: []
-        }
-      }
-      categories[category].items.push({
-        id: item.id,
-        name: item.name,
-        overallRating: item.overallRating
-      })
+      const category = item.category;
+      categoryMap[category].push(item)
     })
-    return categories
+    return categoryMap
   }
 
   render() {
@@ -54,24 +48,27 @@ class Restaurant extends React.Component {
       )
     }
 
-    const categories = this.getCategoriesMap(restaurant.items)
+    const categoryMap = this.getCategoryMap(restaurant.items)
 
     let categoriesList;
-    if(Object.keys(categories).length > 0) {
+    if(Object.keys(categoryMap).length > 0) {
       categoriesList = (
         <div className='restaurant-list'>
-          {Object.keys(categories).sort((a, b) => {
-            return categories[a].order - categories[b].order
-          }).map((category, i) => {
-            return (
-              <MenuCategory
-                key={i}
-                restaurantId={restaurant.id}
-                category={category}
-                items={categories[category].items}
-                refetch={refetch}
-              />
-            )
+          {Object.keys(categoryMap).map((category, i) => {
+            const items = categoryMap[category]
+            console.log(items)
+            if(items.length > 0) {
+              return (
+                <MenuCategory
+                  key={i}
+                  restaurantId={restaurant.id}
+                  category={category}
+                  items={items}
+                  refetch={refetch}
+                />
+              )
+            }
+            return null
           })}
         </div>
       )
@@ -88,7 +85,7 @@ class Restaurant extends React.Component {
         <div className='restaurant-header'>
           <img
             className='restaurant-img'
-            src={cuisineImages[restaurant.type] || cuisineImages.placeholder}
+            src={cuisineImages[restaurant.type] || cuisineImages.default}
             alt={restaurant.type}
           />
           <div className='restaurant-title'>
@@ -124,16 +121,17 @@ const QUERY_RESTAURANTS = gql`
     restaurant(id: $id) {
       id
       name
-      location
+      address
+      phone
+      neighbourhood
       type
+      cuisine
       items {
         id
         name
-        category {
-          id
-          name
-          order
-        }
+        category
+        description
+        price
         overallRating
       }
     }
