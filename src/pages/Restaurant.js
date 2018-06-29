@@ -56,7 +56,6 @@ class Restaurant extends React.Component {
         <div className='restaurant-list'>
           {Object.keys(categoryMap).map((category, i) => {
             const items = categoryMap[category]
-            console.log(items)
             if(items.length > 0) {
               return (
                 <MenuCategory
