@@ -32,7 +32,7 @@ class Welcome extends Component {
       }
       this.signin(user, false)
     }).catch(err => {
-      console.log('err', err)
+      alert(err)
     })
   }
 
