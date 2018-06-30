@@ -29,15 +29,12 @@ export const setLocalStorageUser = (user) => {
 
 export const isLoggedIn = () => {
   if (getLocalStorageUser()) {
-    console.log('logged in')
     return true
   }
-  console.log('not logged in')
   return false
 }
 
 export const logout = (push) => {
-  console.log('logging out')
   clearLocalStorage()
   push(routes.welcome)
 }

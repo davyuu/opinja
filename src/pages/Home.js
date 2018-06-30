@@ -62,6 +62,19 @@ class Home extends React.Component {
     });
   };
 
+  getCuisineImage(restaurant) {
+    const cuisineString = restaurant.cuisine
+    const cuisineSplit = cuisineString.toLowerCase().split(',')
+    let image;
+    for(const cuisine of cuisineSplit) {
+      image = cuisineImages[cuisine.trim()]
+      if(image) {
+        return image
+      }
+    }
+    return cuisineImages.default
+  }
+
   render() {
     const {user, search, selectedSort} = this.state
     const {data} = this.props
@@ -122,8 +135,8 @@ class Home extends React.Component {
               >
                 <img
                   className='home-restaurant-img'
-                  src={cuisineImages[restaurant.type.toLowerCase()] || cuisineImages.default}
-                  alt={restaurant.type}
+                  src={this.getCuisineImage(restaurant)}
+                  alt={restaurant.cuisine}
                 />
                 <div className='home-restaurant-title'>
                   <div className='home-restaurant-side'/>
@@ -154,7 +167,7 @@ const query = gql`{
     id
     name
     address
-    type
+    cuisine
   }
 }`
 
