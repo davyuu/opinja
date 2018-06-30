@@ -9,9 +9,20 @@
   background: lightblue;
 }
 
+.welcome-images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+
+.welcome-icon {
+  width: 60%;
+}
+
 .welcome-logo {
   width: 60%;
-  margin: auto;
 }
 
 .welcome-signin {

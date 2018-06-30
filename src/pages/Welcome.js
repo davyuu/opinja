@@ -90,10 +90,16 @@ class Welcome extends Component {
 
     return (
       <div className='welcome'>
-        <img
-          className='welcome-logo'
-          src={images.logo}
-        />
+        <div className='welcome-images'>
+          <img
+            className='welcome-icon'
+            src={images.icon}
+          />
+          <img
+            className='welcome-logo'
+            src={images.logo}
+          />
+        </div>
         <div className="welcome-signin">
           <div
             className='welcome-signin-button welcome-facebook'
