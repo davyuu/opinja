@@ -4,8 +4,8 @@ import {graphql} from 'react-apollo'
 import {Link} from 'react-router-dom'
 import MaterialIcon from 'material-icons-react'
 import Select, {Option} from 'rc-select'
-import {getLocalStorageUser} from '../utils/functions'
-import cuisineImages from '../images/cuisine'
+import {getCuisineImage} from '../utils/functions'
+import {getLocalStorageUser} from '../utils/storage'
 import routes from '../constants/routes'
 import './Home.css'
 import 'rc-select/assets/index.css';
@@ -61,19 +61,6 @@ class Home extends React.Component {
       selectedSort: value
     });
   };
-
-  getCuisineImage(restaurant) {
-    const cuisineString = restaurant.cuisine
-    const cuisineSplit = cuisineString.toLowerCase().split(',')
-    let image;
-    for(const cuisine of cuisineSplit) {
-      image = cuisineImages[cuisine.trim()]
-      if(image) {
-        return image
-      }
-    }
-    return cuisineImages.default
-  }
 
   render() {
     const {user, search, selectedSort} = this.state
@@ -135,7 +122,7 @@ class Home extends React.Component {
               >
                 <img
                   className='home-restaurant-img'
-                  src={this.getCuisineImage(restaurant)}
+                  src={getCuisineImage(restaurant.cuisine)}
                   alt={restaurant.cuisine}
                 />
                 <div className='home-restaurant-title'>

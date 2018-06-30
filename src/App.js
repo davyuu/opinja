@@ -5,7 +5,7 @@ import {HashRouter as Router, Route, Redirect} from 'react-router-dom'
 import HeaderBar from './components/HeaderBar'
 import Pages from './pages'
 import routes from './constants/routes'
-import {isLoggedIn} from './utils/functions'
+import {isLoggedIn} from './utils/storage'
 import './App.css';
 
 const env = process.env.NODE_ENV

@@ -4,7 +4,7 @@ import Dock from 'react-dock'
 import MaterialIcon from 'material-icons-react'
 import images from '../images/logos'
 import routes from '../constants/routes'
-import {getLocalStorageUser, isLoggedIn, logout} from '../utils/functions'
+import {getLocalStorageUser, isLoggedIn, logout} from '../utils/storage'
 import './HeaderBar.css'
 
 class HeaderBar extends React.Component {

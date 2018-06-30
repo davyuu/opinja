@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import MaterialIcon from 'material-icons-react'
 import MenuCategory from '../components/MenuCategory'
-import categories from '../constants/categories'
-import cuisineImages from '../images/cuisine'
+import categories from '../constants/sum_categories'
+import {getCuisineImage} from '../utils/functions'
 import './Restaurant.css'
 
 class Restaurant extends React.Component {
@@ -84,7 +84,7 @@ class Restaurant extends React.Component {
         <div className='restaurant-header'>
           <img
             className='restaurant-img'
-            src={cuisineImages[restaurant.type] || cuisineImages.default}
+            src={getCuisineImage(restaurant.cuisine)}
             alt={restaurant.type}
           />
           <div className='restaurant-title'>
@@ -120,17 +120,11 @@ const QUERY_RESTAURANTS = gql`
     restaurant(id: $id) {
       id
       name
-      address
-      phone
-      neighbourhood
-      type
       cuisine
       items {
         id
         name
         category
-        description
-        price
         overallRating
       }
     }

@@ -6,7 +6,7 @@ import MaterialIcon from 'material-icons-react'
 import SocialHandleModal from '../components/SocialHandleModal'
 import keys from '../constants/keys'
 import routes from '../constants/routes'
-import {getLocalStorageUser, logout} from '../utils/functions'
+import {getLocalStorageUser, logout} from '../utils/storage'
 import './Profile.css'
 
 class Profile extends React.Component {

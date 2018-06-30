@@ -2,7 +2,7 @@ const categoryImages = {
   appetizers: require('./appetizers.jpg'),
   mains: require('./mains.jpg'),
   desserts: require('./desserts.jpg'),
-  placeholder: require('./placeholder.jpg')
+  default: require('./default.jpg')
 };
 
 export default categoryImages;
