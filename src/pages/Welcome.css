@@ -33,13 +33,13 @@
   align-items: center;
   width: 100%;
   padding-top: 1em;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .welcome-signin-button {
   width: 70%;
-  margin: 1em;
-  padding: 1.5em 2em;
+  margin: 0.8em;
+  padding: 1.2em 2em;
   border-radius: 0.5em;
   text-align: center;
   font-weight: 700;
@@ -56,8 +56,9 @@
 }
 
 .welcome-signin-guest {
-  margin: 1em auto;
+  margin: 0.8em auto;
   text-decoration: underline;
   cursor: pointer;
+  font-size: 0.8em;
   color: white;
 }
