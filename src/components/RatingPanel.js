@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import {graphql} from 'react-apollo'
 import ReactStars from 'react-stars'
 import keys from '../constants/keys'
-import {getLocalStorageRatings, setLocalStorageRating, getLocalStorageUser} from '../utils/functions'
+import {getLocalStorageRatings, setLocalStorageRating, getLocalStorageUser} from '../utils/storage'
 import './RatingPanel.css'
 
 class RatingPanel extends React.Component {
