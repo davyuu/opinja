@@ -40,5 +40,5 @@ export const logout = (push) => {
 }
 
 export const clearLocalStorage = () => {
-  localStorage.clear();
+  localStorage.removeItem(keys.LOCAL_STORAGE_USER_KEY);
 }
